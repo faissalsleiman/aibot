@@ -1,0 +1,181 @@
+AC_INIT(../../../src/samples/consoleHtmlConverter_tag_layer/consoleAIMLHtmlConverter.cpp)
+AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(consoleAIMLHtmlConverter,0.0.1)
+AM_PROG_LIBTOOL
+
+AC_PROG_INSTALL
+bindir="@datadir@/Rebecca/bin/release"
+dnl find and test the C and C++ compiler
+AC_PROG_CC
+AC_LANG_C
+AC_LANG_CPLUSPLUS
+AC_PROG_MAKE_SET
+
+AC_HEADER_STDC
+
+AC_CHECK_HEADERS(boost/algorithm/string.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/tokenizer.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+
+AC_CHECK_HEADERS(boost/shared_ptr.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+
+AC_CHECK_HEADERS(boost/filesystem/operations.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/filesystem/fstream.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/filesystem/exception.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/algorithm/string_regex.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/cast.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/lexical_cast.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+
+AC_CHECK_HEADERS(boost/scoped_ptr.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_LIB(boost_filesystem, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires 
+boost file system to be installed to work.  Download Boost 
+at http://www.boost.org/
+]))
+
+AC_CHECK_LIB(boost_regex, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires 
+boost regex to be installed to work.  Download Boost
+at http://www.boost.org/
+]))
+
+AC_CHECK_LIB(boost_date_time, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires boost date and time
+to be installed to work.  Download Boost
+at http://www.boost.org/
+]))	
+
+AC_CHECK_LIB(dl, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires the dlopen library
+to be installed to work this should come standard on a stock
+Linux/Unix system.  Look at your Linux distibution docs for this
+]))
+
+dnl read Makefile.in and write Makefile
+
+dnl Hidden values overriden only for the RPM build system
+dnl  These are arguments are hidden.  They are arguments to be used with
+dnl the rpm build system.
+
+dnl Set the prefix and exec_prefix if they are not set
+test "$prefix" = NONE && prefix=/usr/local
+test "$exec_prefix" = NONE && exec_prefix=$prefix
+
+
+AC_ARG_WITH([build_prefix],,[BUILD_prefix="$withval"],[BUILD_prefix=$prefix],)
+AC_MSG_RESULT(build_prefix is $BUILD_prefix)
+AC_SUBST(BUILD_prefix)
+
+dnl I have to use prefix for now otherwise it'll expand to nothing
+AC_ARG_WITH([build_exec_prefix],,[BUILD_exec_prefix="$withval"],[BUILD_exec_prefix=$exec_prefix],)
+AC_MSG_RESULT(build_exec_prefix is $BUILD_exec_prefix)
+AC_SUBST(BUILD_exec_prefix)
+
+AC_ARG_WITH([build_includedir],,[BUILD_includedir="$withval"],[BUILD_includedir=${includedir}],)
+AC_MSG_RESULT(build_includedir is $BUILD_includedir)
+AC_SUBST(BUILD_includedir)
+
+AC_ARG_WITH([build_libdir],,[BUILD_libdir="$withval"],[BUILD_libdir=${libdir}],)
+AC_MSG_RESULT(build_libdir is $BUILD_libdir)
+AC_SUBST(BUILD_libdir)
+
+AC_ARG_WITH([build_datadir],,[BUILD_datadir="$withval"],[BUILD_datadir=${datadir}],)
+AC_MSG_RESULT(build_datadir is $BUILD_datadir)
+AC_SUBST(BUILD_datadir)
+
+AC_SUBST(BUILD_prefix)
+AC_SUBST(BUILD_exec_prefix)
+AC_SUBST(BUILD_includedir)
+AC_SUBST(BUILD_libdir)
+AC_SUBST(BUILD_datadir)
+
+
+dnl output the Makefile script
+AC_CONFIG_FILES(scripts/Makefile)
+
+dnl read Makefile.in and write Makefile
+AC_OUTPUT(Makefile)
+

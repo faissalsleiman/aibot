@@ -1,0 +1,67 @@
+------------------------------------------------------------------
+
+* WELCOME!
+
+How to install the full source code and RebeccaAIML engine 
+from scratch for Linux
+
+------------------------------------------------------------------
+
+* AUTHOR and LICENSE
+
+Who wrote this?  Frank Hassanabad : foreverlinux@yahoo.com
+Drop me an email if you have any problems.
+See license.txt about the LGPL licence in which 
+this project is covered.
+
+------------------------------------------------------------------
+
+* AUTOCONF, aka (configure;make;make install)
+
+First ensure you have the Linux dependencies for your platform 
+installed.  See http://rebecca-aiml.sourceforge.net/download.htm
+if you have not already ensured they were installed.
+
+Change to the directory [build_files/autoconf] and simply type
+$ configure
+$ make
+$ make install
+
+to install it.
+
+There's some options you can use such as not generating doxygen,
+not generating samples or a specific sample.  To see these options
+type: 
+$ configure --help
+
+------------------------------------------------------------------
+
+* BUILD AN RPM FOR YOUR PLATFORM 
+
+First ensure you can build it from the source using autconf above.
+If you can, then download the tar ball and type:
+
+$ rpmbuild -ta RebeccaAIML-src-${version}.tar.gz 
+
+where version is at least version 985 or greater
+
+------------------------------------------------------------------
+
+*** DEPRECATED!!!! USE THE autoconf ABOVE!!!! ****
+
+* OLD MAKEFILE WAY 
+
+Change your working directory to [build_files/gnumake]
+
+Edit the file config.mk to setup a small handful
+of variables.
+
+
+Then, run "gmake" to build in release. For debug run
+"gmake debug=true"
+
+If you want to create a distribution of aiml without
+any of the sourcefiles you can run
+"gmake dist" This creates a seperate directory with
+just the needed files and runs doxygen for the
+documentation

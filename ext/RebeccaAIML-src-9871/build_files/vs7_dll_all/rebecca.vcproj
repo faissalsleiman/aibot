@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="rebecca"
+	ProjectGUID="{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}"
+	SccProjectName=""
+	SccLocalPath="">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\..\..\bin\release"
+			IntermediateDirectory=".\Release"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				GlobalOptimizations="TRUE"
+				InlineFunctionExpansion="2"
+				EnableIntrinsicFunctions="TRUE"
+				AdditionalIncludeDirectories="$(XERCES_INCLUDE),..\..\include,$(BOOST_INCLUDE)"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				RuntimeTypeInfo="TRUE"
+				PrecompiledHeaderFile=".\Release/rebecca.pch"
+				AssemblerListingLocation=".\Release/"
+				ObjectFile=".\Release/"
+				ProgramDataBaseFileName=".\Release/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="odbc32.lib odbccp32.lib xerces-c_2.lib"
+				OutputFile="..\..\bin\release\rebecca-mt.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="$(XERCES_LIB),$(BOOST_LIB)"
+				ProgramDatabaseFile=".\..\..\bin\release/rebecca-mt.pdb"
+				ImportLibrary=".\..\..\bin\release/rebecca-mt.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\..\..\bin\release/rebecca.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="@echo off
+
+if X%BOOST_INCLUDE%==X goto HOWTORUN
+if X%BOOST_LIB% == X goto HOWTORUN
+if X%BOOST_LIBD% == X goto HOWTORUN
+if X%XERCES_LIB% == X goto HOWTORUN
+if X%XERCES_LIBD% == X goto HOWTORUN
+if X%XERCES_INCLUDE% == X goto HOWTORUN
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo XERCES_LIB -- Point this to the location of your xerces release library.
+echo XERCES_LIBD -- Point this to the location of your xerces debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
+echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That&apos;s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\..\..\bin\debug"
+			IntermediateDirectory=".\Debug"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(XERCES_INCLUDE),..\..\include,$(BOOST_INCLUDE)"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				PrecompiledHeaderFile=".\Debug/rebecca.pch"
+				AssemblerListingLocation=".\Debug/"
+				ObjectFile=".\Debug/"
+				ProgramDataBaseFileName=".\Debug/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="odbc32.lib odbccp32.lib xerces-c_2D.lib"
+				OutputFile="..\..\bin\debug\rebecca-mtD.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="$(XERCES_LIBD),$(BOOST_LIBD)"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile=".\..\..\bin\debug/rebecca-mt.pdb"
+				ImportLibrary=".\..\..\bin\debug/rebecca-mtD.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\..\..\bin\debug/rebecca.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="@echo off
+
+if X%BOOST_INCLUDE%==X goto HOWTORUN
+if X%BOOST_LIB% == X goto HOWTORUN
+if X%BOOST_LIBD% == X goto HOWTORUN
+if X%XERCES_LIB% == X goto HOWTORUN
+if X%XERCES_LIBD% == X goto HOWTORUN
+if X%XERCES_INCLUDE% == X goto HOWTORUN
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo XERCES_LIB -- Point this to the location of your xerces release library.
+echo XERCES_LIBD -- Point this to the location of your xerces debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
+echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That&apos;s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			<Filter
+				Name="rebecca"
+				Filter="">
+				<File
+					RelativePath="..\..\src\rebecca\AimlFacade.cpp">
+				</File>
+				<File
+					RelativePath="..\..\src\rebecca\GraphBuilder.cpp">
+				</File>
+				<File
+					RelativePath="..\..\src\rebecca\StringPimpl.cpp">
+				</File>
+				<Filter
+					Name="impl"
+					Filter="">
+					<File
+						RelativePath="..\..\src\rebecca\impl\ConfigurationHandler.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\ConfigurationHandlerError.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\CustomTagWithDelete.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\Factory.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\getStringFromSentence.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\GraphBuilderAIML.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\GraphBuilderInternal.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\GraphHandler.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\GraphHandlerError.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\NodeMapper.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\impl\PrototypeFactory.cpp">
+					</File>
+					<Filter
+						Name="utils"
+						Filter="">
+						<File
+							RelativePath="..\..\src\rebecca\impl\utils\Logging.cpp">
+							<FileConfiguration
+								Name="Release|Win32">
+								<Tool
+									Name="VCCLCompilerTool"
+									Optimization="2"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;$(NoInherit)"/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Debug|Win32">
+								<Tool
+									Name="VCCLCompilerTool"
+									Optimization="0"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING;$(NoInherit)"
+									BasicRuntimeChecks="3"/>
+							</FileConfiguration>
+						</File>
+						<File
+							RelativePath="..\..\src\rebecca\impl\utils\StackTrace.cpp">
+							<FileConfiguration
+								Name="Release|Win32">
+								<Tool
+									Name="VCCLCompilerTool"
+									Optimization="2"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;$(NoInherit)"/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Debug|Win32">
+								<Tool
+									Name="VCCLCompilerTool"
+									Optimization="0"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING;$(NoInherit)"
+									BasicRuntimeChecks="3"/>
+							</FileConfiguration>
+						</File>
+						<File
+							RelativePath="..\..\src\rebecca\impl\utils\Transcode.cpp">
+							<FileConfiguration
+								Name="Release|Win32">
+								<Tool
+									Name="VCCLCompilerTool"
+									Optimization="2"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;$(NoInherit)"/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Debug|Win32">
+								<Tool
+									Name="VCCLCompilerTool"
+									Optimization="0"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING;$(NoInherit)"
+									BasicRuntimeChecks="3"/>
+							</FileConfiguration>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="framework"
+					Filter="">
+					<File
+						RelativePath="..\..\src\rebecca\framework\AIML.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Bot.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Category.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Condition.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Date.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Formal.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Gender.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Get.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Gossip.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\GraphBuilderFramework.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Id.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\InnerAIML.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\InnerCategory.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\InnerTemplaListImpl.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\InnerTemplate.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\InnerTopic.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Input.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Learn.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Li.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\LowerCase.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\NonImplemented.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Pattern.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\PatternSideThat.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Person.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Person2.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\PlainWord.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Random.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Sentence.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Set.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Size.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Srai.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Star.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\System.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Tag.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Template.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\TemplateSideThat.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\ThatStar.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Think.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Topic.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\TopicStar.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\UpperCase.cpp">
+					</File>
+					<File
+						RelativePath="..\..\src\rebecca\framework\Version.cpp">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl">
+			<Filter
+				Name="rebecca_h"
+				Filter="">
+				<File
+					RelativePath="..\..\include\rebecca\AimlFacade.h">
+				</File>
+				<File
+					RelativePath="..\..\include\rebecca\all.h">
+				</File>
+				<File
+					RelativePath="..\..\include\rebecca\CallBacks.h">
+				</File>
+				<File
+					RelativePath="..\..\include\rebecca\Exceptions.h">
+				</File>
+				<File
+					RelativePath="..\..\include\rebecca\exports.h">
+				</File>
+				<File
+					RelativePath="..\..\include\rebecca\GraphBuilder.h">
+				</File>
+				<File
+					RelativePath="..\..\include\rebecca\StringPimpl.h">
+				</File>
+				<Filter
+					Name="adt_h"
+					Filter="">
+					<File
+						RelativePath="..\..\include\rebecca\adt\Deque.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\adt\List.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\adt\Map.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\adt\Queue.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\adt\Stack.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\adt\String.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\adt\Vector.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="impl_h"
+					Filter="">
+					<File
+						RelativePath="..\..\include\rebecca\impl\ConfigurationHandler.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\ConfigurationHandlerError.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\CustomTagWithDelete.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\Exceptions.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\Factory.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\getStringFromSentence.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\GraphBuilderAIML.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\GraphBuilderInternal.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\GraphBuilderInternalNoOps.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\GraphHandler.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\GraphHandlerError.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\NodeMapper.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\impl\PrototypeFactory.h">
+					</File>
+					<Filter
+						Name="utils_h"
+						Filter="">
+						<File
+							RelativePath="..\..\include\rebecca\impl\utils\Logging.h">
+						</File>
+						<File
+							RelativePath="..\..\include\rebecca\impl\utils\StackTrace.h">
+						</File>
+						<File
+							RelativePath="..\..\include\rebecca\impl\utils\Transcode.h">
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="framework"
+					Filter="">
+					<File
+						RelativePath="..\..\include\rebecca\framework\AIML.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Bot.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Category.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Condition.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\CustomTags.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Date.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Formal.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Gender.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Get.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Gossip.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\GraphBuilderFramework.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Id.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\InnerAIML.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\InnerCategory.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\InnerTemplate.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\InnerTemplateListImpl.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\InnerTopic.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Input.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Learn.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Li.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\LowerCase.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\NonImplemented.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Pattern.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\PatternSideThat.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Person.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Person2.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\PlainWord.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Random.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Sentence.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Set.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Size.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Srai.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Star.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\System.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Tag.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Template.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\TemplateSideThat.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\ThatStar.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Think.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Topic.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\TopicStar.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\UpperCase.h">
+					</File>
+					<File
+						RelativePath="..\..\include\rebecca\framework\Version.h">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

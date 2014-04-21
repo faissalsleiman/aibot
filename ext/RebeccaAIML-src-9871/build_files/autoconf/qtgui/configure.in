@@ -1,0 +1,85 @@
+AC_INIT(../../../src/samples/qtgui/main.cpp)
+AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(qtgui,0.0.1)
+AM_PROG_LIBTOOL
+AC_PROG_INSTALL
+bindir="@datadir@/Rebecca/bin/release"
+dnl find and test the C and C++ compiler
+AC_PROG_CC
+AC_LANG_C
+AC_LANG_CPLUSPLUS
+AC_PROG_MAKE_SET
+
+AC_HEADER_STDC
+
+AC_ARG_WITH([qt-dir],
+             AC_HELP_STRING([--with-qt-dir=/path/to/Qt-4.1.1],
+                            [to specify the path to the Qt-4.1.1 directory.]),
+             [QTPATHS="$withval"],
+             [QTPATHS="/usr/local/Trolltech/Qt-4.1.1 /usr/lib/qt4"])
+
+QTMYDIR=xxx
+for x in $QTPATHS; do
+    if test -d $x ; then
+       QTMYDIR="$x"
+	   MYQMAKE="${x}/bin/qmake"
+    fi
+done
+
+if test $QTMYDIR = xxx ; then
+   AC_MSG_ERROR([
+Could not locate QT 4.1.1, please install it from http://www.trolltech.com/
+If you have installed it but it is in a different location than
+/usr/local/Trolltech/Qt-4.1.1 then use --with-qt-dir=/path/to/Qt-4.1.1 
+and put your path after the equals sign
+])
+fi
+
+touch ../../../bin/release/qtgui
+AC_MSG_RESULT(Found QT 4.1.1 at $QTMYDIR)
+AC_MSG_RESULT(Using this qmake $MYQMAKE)
+
+dnl read Makefile.in and write Makefile
+
+dnl Hidden values overriden only for the RPM build system
+dnl  These are arguments are hidden.  They are arguments to be used with
+dnl the rpm build system.
+
+dnl Set the prefix and exec_prefix if they are not set
+test "$prefix" = NONE && prefix=/usr/local
+test "$exec_prefix" = NONE && exec_prefix=$prefix
+
+
+AC_ARG_WITH([build_prefix],,[BUILD_prefix="$withval"],[BUILD_prefix=$prefix],)
+AC_MSG_RESULT(build_prefix is $BUILD_prefix)
+AC_SUBST(BUILD_prefix)
+
+dnl I have to use prefix for now otherwise it'll expand to nothing
+AC_ARG_WITH([build_exec_prefix],,[BUILD_exec_prefix="$withval"],[BUILD_exec_prefix=$exec_prefix],)
+AC_MSG_RESULT(build_exec_prefix is $BUILD_exec_prefix)
+AC_SUBST(BUILD_exec_prefix)
+
+AC_ARG_WITH([build_includedir],,[BUILD_includedir="$withval"],[BUILD_includedir=${includedir}],)
+AC_MSG_RESULT(build_includedir is $BUILD_includedir)
+AC_SUBST(BUILD_includedir)
+
+AC_ARG_WITH([build_libdir],,[BUILD_libdir="$withval"],[BUILD_libdir=${libdir}],)
+AC_MSG_RESULT(build_libdir is $BUILD_libdir)
+AC_SUBST(BUILD_libdir)
+
+AC_ARG_WITH([build_datadir],,[BUILD_datadir="$withval"],[BUILD_datadir=${datadir}],)
+AC_MSG_RESULT(build_datadir is $BUILD_datadir)
+AC_SUBST(BUILD_datadir)
+
+AC_SUBST(BUILD_prefix)
+AC_SUBST(BUILD_exec_prefix)
+AC_SUBST(BUILD_includedir)
+AC_SUBST(BUILD_libdir)
+AC_SUBST(BUILD_datadir)
+
+AC_CONFIG_FILES(scripts/qtgui.pro)
+
+AC_SUBST(MYQMAKE)
+dnl read Makefile.in and write Makefile
+AC_OUTPUT(Makefile)
+

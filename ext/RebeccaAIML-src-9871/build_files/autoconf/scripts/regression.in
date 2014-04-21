@@ -1,0 +1,21 @@
+#!/bin/sh
+
+#
+# This script makes it easy and
+# possible to excute the binary
+# sample from anywhere in the system.
+# You won't have to be in a particular
+# directory to execute the sample.
+#
+# The switch -cd means Configuration Directory
+# and informs the sample of where the configuration
+# directory is located.
+#
+# The switch -ad means Add Directory and informs
+# the sample which directory to add the aiml files
+# is.
+#
+
+prefix=@BUILD_prefix@
+@BUILD_datadir@/Rebecca/bin/release/regression -cd @BUILD_datadir@/Rebecca/conf -ad @BUILD_datadir@/Rebecca/aiml/annotated_alice -rd ${prefix}/share/Rebecca/resources
+

@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "regression", "regression.vcproj", "{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF} = {A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rebecca", "..\..\vs7_dll_all\rebecca.vcproj", "{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Debug.ActiveCfg = Debug|Win32
+		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Debug.Build.0 = Debug|Win32
+		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Release.ActiveCfg = Release|Win32
+		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Release.Build.0 = Release|Win32
+		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Debug.ActiveCfg = Debug|Win32
+		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Debug.Build.0 = Debug|Win32
+		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Release.ActiveCfg = Release|Win32
+		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

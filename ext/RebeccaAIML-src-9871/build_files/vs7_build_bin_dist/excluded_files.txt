@@ -1,0 +1,10 @@
+.ncb
+.suo
+.ilk
+.lib
+.ncb
+.suo
+.exp
+\CVS\
+\Debug\
+\Release\

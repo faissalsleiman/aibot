@@ -1,0 +1,23 @@
+
+
+These are the files needed to be checked in CVS:
+
+aclocal.m4
+AUTHORS
+bootstrap.sh
+ChangeLog
+config.guess
+config.log
+config.sub
+configure
+configure.in
+COPYING
+depcomp
+INSTALL
+install-sh
+ltmain.sh
+Makefile.am
+missing
+NEWS
+README
+TODO

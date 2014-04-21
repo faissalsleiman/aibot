@@ -1,0 +1,40 @@
+autoconf TODO:
+- Copy more README's to the rebecca/share directory and below.
+
+TODO First:
+- Fix the logging mechanism and ensure every method logs at least LOG_BOT_METHOD
+- Fix the html generator to have a CustomLearn tag
+- Add a method for getting all the predicates from the system.
+- Add regression test suite as part of the distribution but keep it 
+  it still as implementation specific.
+		 * Add it to the autoconf build system under Linux
+		
+- Make methods on the builder for policies based on what to do when hitting 
+    identical "PATTERN <that> THAT <topic> TOPIC"  They would be:
+        * skip
+        * append
+        * overwrite
+        * combine
+- Make a callback for when an identical "PATTERN <that> THAT <topic> TOPIC" is
+    encountered it will call the callback.
+- Fix the numeric thatTagNumericConversionError:Second index string is not a valid number, * error
+
+Future:
+- Make the xml engine pluggable so that something such as libexpat could be used in place of xerces
+- Add api for return name when set
+- Make rebecca be able to use the <learn> tag from pandora bots as a layer
+- Make Rebecca parse predicates.xml so that she can set predicates as well as the "return name when set".
+- Make Rebecca set the predicate top in the predicates.xml to OM and 
+     remove the top being set in the Predicates.aiml file.
+- Should we perhaps make a utility dll/so?  At the least should we make a
+  Prediacates class that encompasses the read/write predicates with a factory
+  that can be set in the builder class.  That way the user can define their
+  behvaoir of what to do with reading and writing the predicates 
+- Support mulituser enviornment.  You can switch users through a "id"
+- Add the Javascript engine
+
+Far Future:
+- Add multithreading
+- Add multi-bot support efficiently.  This can be accomplished by add a "bot id" to the graphmaster.
+- Document and release doxygen of the internal api
+- Open up and document how others can make their own releases using the batch files.

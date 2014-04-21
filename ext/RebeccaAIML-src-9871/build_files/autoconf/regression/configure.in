@@ -1,0 +1,73 @@
+AC_INIT(../../../src/tests/regression/TestCases.cpp)
+AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(regression,0.0.1)
+AM_PROG_LIBTOOL
+
+AC_PROG_INSTALL
+bindir="@datadir@/Rebecca/bin/release"
+dnl find and test the C and C++ compiler
+AC_PROG_CC
+AC_LANG_C
+AC_LANG_CPLUSPLUS
+AC_PROG_MAKE_SET
+
+AC_HEADER_STDC
+
+dnl AC_CHECK_HEADERS(rebecca/all.h,,
+dnl AC_MSG_ERROR([
+dnl Coud not find the above rebecca header file.
+dnl Did you install the RebeccaAIML library file
+dnl and its headers? You should go to the directory
+dnl build_files/autoconf/lib and build that first
+dnl and ensure you put the header files where I 
+dnl can find them first
+dnl ]))
+
+dnl AC_CHECK_LIB(rebecca-mt,main,,AC_MSG_ERROR([
+dnl could not link to RebeccaAIML library.  Install the
+dnl library to RebeccaAIML first.  If you have already done so; 
+dnl please run ldconfig as root or check whether the path libRebeccaAIML 
+dnl was installed to is in your LD_LIBRARY_PATH
+dnl ]))
+
+
+dnl read Makefile.in and write Makefile
+
+dnl Hidden values overriden only for the RPM build system
+dnl  These are arguments are hidden.  They are arguments to be used with
+dnl the rpm build system.
+
+dnl Set the prefix and exec_prefix if they are not set
+test "$prefix" = NONE && prefix=/usr/local
+test "$exec_prefix" = NONE && exec_prefix=$prefix
+
+AC_ARG_WITH([build_prefix],,[BUILD_prefix="$withval"],[BUILD_prefix=${prefix}],)
+AC_MSG_RESULT(build_prefix is $BUILD_prefix)
+AC_SUBST(BUILD_prefix)
+
+dnl I have to use prefix for now otherwise it'll expand to nothing
+AC_ARG_WITH([build_exec_prefix],,[BUILD_exec_prefix="$withval"],[BUILD_exec_prefix=${exec_prefix}],)
+AC_MSG_RESULT(build_exec_prefix is $BUILD_exec_prefix)
+AC_SUBST(BUILD_exec_prefix)
+
+AC_ARG_WITH([build_includedir],,[BUILD_includedir="$withval"],[BUILD_includedir=${includedir}],)
+AC_MSG_RESULT(build_includedir is $BUILD_includedir)
+AC_SUBST(BUILD_includedir)
+
+AC_ARG_WITH([build_libdir],,[BUILD_libdir="$withval"],[BUILD_libdir=${libdir}],)
+AC_MSG_RESULT(build_libdir is $BUILD_libdir)
+AC_SUBST(BUILD_libdir)
+
+AC_ARG_WITH([build_datadir],,[BUILD_datadir="$withval"],[BUILD_datadir=${datadir}],)
+AC_MSG_RESULT(build_datadir is $BUILD_datadir)
+AC_SUBST(BUILD_datadir)
+
+
+
+AC_SUBST(BUILD_prefix)
+AC_SUBST(BUILD_exec_prefix)
+AC_SUBST(BUILD_includedir)
+AC_SUBST(BUILD_libdir)
+AC_SUBST(BUILD_datadir)
+AC_OUTPUT(Makefile)
+

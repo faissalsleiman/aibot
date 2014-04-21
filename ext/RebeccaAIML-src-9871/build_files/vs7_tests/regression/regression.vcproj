@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="regression"
+	ProjectGUID="{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}"
+	RootNamespace="regression"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="..\..\..\bin\release"
+			IntermediateDirectory="Debug"
+			ConfigurationType="1"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(BOOST_INCLUDE);$(XERCES_INCLUDE);..\..\..\src\tests\regression\include;..\..\..\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;BOOST_LIB_DIAGNOSTIC"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="xerces-c_2D.lib"
+				OutputFile="..\..\..\bin\release\regression.exe"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(XERCES_LIBD),$(BOOST_LIBD)"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/regression.pdb"
+				SubSystem="1"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="@echo off
+
+if X%BOOST_INCLUDE%==X goto HOWTORUN
+if X%BOOST_LIB% == X goto HOWTORUN
+if X%BOOST_LIBD% == X goto HOWTORUN
+if X%XERCES_LIB% == X goto HOWTORUN
+if X%XERCES_LIBD% == X goto HOWTORUN
+if X%XERCES_INCLUDE% == X goto HOWTORUN
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo XERCES_LIB -- Point this to the location of your xerces release library.
+echo XERCES_LIBD -- Point this to the location of your xerces debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
+echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That&apos;s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="..\..\..\bin\release"
+			IntermediateDirectory="Release"
+			ConfigurationType="1"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(BOOST_INCLUDE);$(XERCES_INCLUDE);..\..\..\src\tests\regression\include;..\..\..\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;BOOST_LIB_DIAGNOSTIC"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="xerces-c_2.lib"
+				OutputFile="..\..\..\bin\release\regression.exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(XERCES_LIB),$(BOOST_LIB)"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="@echo off
+
+if X%BOOST_INCLUDE%==X goto HOWTORUN
+if X%BOOST_LIB% == X goto HOWTORUN
+if X%BOOST_LIBD% == X goto HOWTORUN
+if X%XERCES_LIB% == X goto HOWTORUN
+if X%XERCES_LIBD% == X goto HOWTORUN
+if X%XERCES_INCLUDE% == X goto HOWTORUN
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo XERCES_LIB -- Point this to the location of your xerces release library.
+echo XERCES_LIBD -- Point this to the location of your xerces debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
+echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That&apos;s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			<File
+				RelativePath="..\..\..\src\tests\regression\main.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\src\tests\regression\TestCases.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\src\tests\regression\TestCasesHandler.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<Filter
+				Name="rebecca_h"
+				Filter="">
+				<File
+					RelativePath="..\..\..\src\tests\regression\include\rebecca\TestCases.h">
+				</File>
+				<File
+					RelativePath="..\..\..\src\tests\regression\include\rebecca\TestCasesHandler.h">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

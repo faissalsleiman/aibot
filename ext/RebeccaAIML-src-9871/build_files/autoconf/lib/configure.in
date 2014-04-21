@@ -1,0 +1,202 @@
+AC_INIT(../../../src/rebecca/AimlFacade.cpp)
+AM_INIT_AUTOMAKE(rebecca-mt,0.0.1)
+AC_CONFIG_HEADER(config.h)
+AM_PROG_LIBTOOL
+
+AC_PROG_INSTALL
+
+dnl find and test the C and C++ compiler
+AC_PROG_CC
+AC_LANG_C
+AC_LANG_CPLUSPLUS
+AC_PROG_MAKE_SET
+
+AC_HEADER_STDC
+
+dnl Check all the dependency header files
+dnl Make sure they're all there.
+
+AC_CHECK_HEADERS(boost/algorithm/string.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/tokenizer.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+
+AC_CHECK_HEADERS(boost/shared_ptr.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+
+AC_CHECK_HEADERS(boost/filesystem/operations.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/filesystem/fstream.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/filesystem/exception.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/algorithm/string_regex.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/cast.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(boost/lexical_cast.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+
+AC_CHECK_HEADERS(boost/scoped_ptr.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above boost header file!  Do you have boost installed
+and are pointing to the boost header file?  You need to
+have boost installed to work.  Download 
+Boost at http://www.boost.org/
+]))
+
+AC_CHECK_HEADERS(xercesc/sax/HandlerBase.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above xerces header file!  Do you have xerces installed
+and are pointing to the xerces header file?  You need to
+have xerces installed to work.  Download 
+Xerces 2.6 at http://xml.apache.org/xerces-c/
+]))
+
+AC_CHECK_HEADERS(xercesc/parsers/SAXParser.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above xerces header file!  Do you have xerces installed
+and are pointing to the xerces header file?  You need to
+have xerces installed to work.  Download 
+Xerces 2.6 at http://xml.apache.org/xerces-c/
+]))
+
+AC_CHECK_HEADERS(xercesc/util/XMLString.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above xerces header file!  Do you have xerces installed
+and are pointing to the xerces header file?  You need to
+have xerces installed to work.  Download 
+Xerces 2.6 at http://xml.apache.org/xerces-c/
+]))
+
+AC_CHECK_HEADERS(xercesc/util/XercesDefs.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above xerces header file!  Do you have xerces installed
+and are pointing to the xerces header file?  You need to
+have xerces installed to work.  Download 
+Xerces 2.6 at http://xml.apache.org/xerces-c/
+]))
+
+AC_CHECK_HEADERS(xercesc/framework/LocalFileInputSource.hpp,,
+AC_MSG_ERROR([
+RebeccaAIML cannot find
+the above xerces header file!  Do you have xerces installed
+and are pointing to the xerces header file?  You need to
+have xerces installed to work.  Download 
+Xerces 2.6 at http://xml.apache.org/xerces-c/
+]))
+
+
+
+
+
+
+dnl Check all the library dependencies 
+dnl Make sure they're all there
+
+AC_CHECK_LIB(xerces-c, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires 
+Xerces 2.6 to be installed to work.  Look at:
+http://xml.apache.org/xerces-c/ for getting it
+]))
+
+AC_CHECK_LIB(boost_filesystem, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires 
+boost file system to be installed to work.  Download Boost 
+at http://www.boost.org/
+]))
+
+AC_CHECK_LIB(boost_regex, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires 
+boost regex to be installed to work.  Download Boost
+at http://www.boost.org/
+]))
+
+AC_CHECK_LIB(boost_date_time, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires boost date and time
+to be installed to work.  Download Boost
+at http://www.boost.org/
+]))	
+
+AC_CHECK_LIB(dl, main,,
+AC_MSG_ERROR([
+RebeccaAIML requires the dlopen library
+to be installed to work this should come standard on a stock
+Linux/Unix system.  Look at your Linux distibution docs for this
+]))	
+
+dnl read Makefile.in and write Makefile
+AC_OUTPUT(Makefile)
+

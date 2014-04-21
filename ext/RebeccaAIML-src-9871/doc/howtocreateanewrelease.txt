@@ -1,0 +1,30 @@
+
+For developers on making a new release which is just me at the moment :)
+
+- Edit Release notes and add the new notes at the top of the file.
+
+- Edit rebecca.spec 
+    * Change Version for the new version
+	* Change Source to put in the new source code location of the new version
+	* Change %changelog section to add the release notes as well as today's date
+
+- Edit GraphBuilderAIML::getVersion and change the version number.
+
+- Edit the vs7_build_bin_dist\environment_variables.cmd file and change 
+  the version number in there.
+
+- Do a check-in at this point.
+
+- Run the build_dist_and_source.bat command to begin building under Windows
+
+- ssh over to the linux boxes 
+  Change the version number in check_out_and_build.sh and then 
+  run the check_out_and_build.sh script.
+ 
+- Edit the web pages in the doc folder for the new release.
+
+- Check this in at this point.
+
+- Upload all the files to sourceforge and the web pages.
+
+

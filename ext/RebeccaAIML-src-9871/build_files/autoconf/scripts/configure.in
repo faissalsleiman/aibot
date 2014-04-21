@@ -1,0 +1,112 @@
+AC_INIT(../../../src/samples/console/console.cpp)
+AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(scripts,0.0.1)
+AM_PROG_LIBTOOL
+AC_PROG_INSTALL
+dnl find and test the C and C++ compiler
+AC_PROG_CC
+AC_LANG_C
+AC_LANG_CPLUSPLUS
+AC_PROG_MAKE_SET
+
+AC_HEADER_STDC
+
+AC_ARG_WITH([doxygen],
+             AC_HELP_STRING([--without-doxygen],
+                            ["If you want to disable generating doxygen"]),
+            [MakeAll=all:],[MakeAll="all: doxygen"] )
+
+AC_ARG_WITH([console],
+             AC_HELP_STRING([--without-console],
+                            ["If you want to disable generating the console sample"]),
+            [no_console="true"],,)
+
+AC_ARG_WITH([consoleHtmlConverter],
+             AC_HELP_STRING([--without-consoleHtmlConverter],
+                            ["If you want to disable generating the console html converter sample"]),
+            [no_consoleHtmlConverter="true"],,)
+
+AC_ARG_WITH([qtgui],
+             AC_HELP_STRING([--without-qtgui],
+                            ["If you want to disable generating the Qt gui sample"]),
+            [no_qtgui="true"],,)
+
+AC_ARG_WITH([samples],
+             AC_HELP_STRING([--without-samples],
+                            ["If you want to disable generating all the samples
+                             listed above.  This would be console, consoleHtmlConverter,
+                             and qtgui"]),
+            [no_samples="true"],,)
+
+AC_ARG_WITH([regression],
+             AC_HELP_STRING([--without-regression],
+                            ["If you want to disable generating the regression suite"]),
+            [no_regression="true"],,)
+
+
+dnl read Makefile.in and write Makefile
+
+dnl Hidden values overriden only for the RPM build system
+dnl  These are arguments are hidden.  They are arguments to be used with
+dnl the rpm build system.
+
+dnl Set the prefix and exec_prefix if they are not set
+test "$prefix" = NONE && prefix=/usr/local
+test "$exec_prefix" = NONE && exec_prefix=$prefix
+
+
+AC_ARG_WITH([build_prefix],,[BUILD_prefix="$withval"],[BUILD_prefix=$prefix],)
+AC_MSG_RESULT(build_prefix is $BUILD_prefix)
+AC_SUBST(BUILD_prefix)
+
+dnl I have to use prefix for now otherwise it'll expand to nothing
+AC_ARG_WITH([build_exec_prefix],,[BUILD_exec_prefix="$withval"],[BUILD_exec_prefix=$exec_prefix],)
+AC_MSG_RESULT(build_exec_prefix is $BUILD_exec_prefix)
+AC_SUBST(BUILD_exec_prefix)
+
+AC_ARG_WITH([build_includedir],,[BUILD_includedir="$withval"],[BUILD_includedir=${includedir}],)
+AC_MSG_RESULT(build_includedir is $BUILD_includedir)
+AC_SUBST(BUILD_includedir)
+
+AC_ARG_WITH([build_libdir],,[BUILD_libdir="$withval"],[BUILD_libdir=${libdir}],)
+AC_MSG_RESULT(build_libdir is $BUILD_libdir)
+AC_SUBST(BUILD_libdir)
+
+AC_ARG_WITH([build_datadir],,[BUILD_datadir="$withval"],[BUILD_datadir=${datadir}],)
+AC_MSG_RESULT(build_datadir is $BUILD_datadir)
+AC_SUBST(BUILD_datadir)
+
+AC_SUBST(BUILD_prefix)
+AC_SUBST(BUILD_exec_prefix)
+AC_SUBST(BUILD_includedir)
+AC_SUBST(BUILD_libdir)
+AC_SUBST(BUILD_datadir)
+
+if test "$no_samples" != true; then
+    if test "$no_console" != true; then
+	    AC_CONFIG_FILES(console)
+        mysamples="console"
+    fi
+
+    if test "$no_consoleHtmlConverter" != true; then
+	    AC_CONFIG_FILES(consoleAIMLHtmlConverter)
+	    mysamples="$mysamples consoleAIMLHtmlConverter"
+    fi
+
+    if test "$no_qtgui" != true; then
+	    AC_CONFIG_FILES(qtgui)
+	    mysamples="$mysamples qtgui"
+    fi
+fi
+
+if test "$no_regression" != true; then
+    AC_CONFIG_FILES(regression)
+    mysamples="$mysamples regression"
+fi
+
+
+AC_SUBST(mysamples)
+
+dnl read Makefile.in and write Makefile
+AC_OUTPUT(Makefile)
+

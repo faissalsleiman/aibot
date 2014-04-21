@@ -1,0 +1,2 @@
+See doc\windowsInstall.txt or doc\linuxInstall.txt for install 
+instructions of the source distribution.

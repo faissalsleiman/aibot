@@ -1,0 +1,84 @@
+------------------------------------------------------------------
+
+* WELCOME!
+
+How to install the full source code and RebeccaAIML engine 
+from scratch for Windows
+
+------------------------------------------------------------------
+
+* AUTHOR and LICENSE
+
+Who wrote this?  Frank Hassanabad : foreverlinux@yahoo.com
+Drop me an email if you have any problems.
+See license.txt about the LGPL licence in which 
+this project is covered.
+
+------------------------------------------------------------------
+
+* STANDARD EASIEST WAY
+
+These are simple instructions on how to make a build 
+from the source code.
+
+Pre-reqs
+========
+
+You need to install Boost 1.33.1 and Xerces 2.6.0. 
+
+Define the following enviornment variables: 
+
+BOOST_INCLUDE  -- Define this to be the directory of 
+                  the boost include files.
+
+XERCES_INCLUDE -- Define this to be the directory of 
+                  the xerces include files.
+
+BOOST_LIB      -- Define this to the directory of 
+                  the BOOST compiled release libs 
+
+BOOST_LIBD     -- Define this to the directory of 
+                  the BOOST complied debug libs.
+
+XERCES_LIB     -- Define this to the directory of 
+                  the XERCES compiled release libs.
+
+XERCES_LIBD    -- Define this to the directory of 
+                  the XERCES compiled debug libs.
+
+Put the xerces dll xerces-c_2_6.dll into the 
+[bin\release] directory of Rebecca and the 
+debuggable of xerces-c_2_6D.dll into 
+[bin\debug]
+
+Open up the visual studio solution: 
+
+build_files\vs7_dll\rebecca.sln 
+
+Then do a rebuild all for either release or debug
+and you should be good to go.
+
+------------------------------------------------------------------
+
+Follow the same steps outlined above to first setup your 
+enviornment.
+
+To build the regression test suite, open 
+[build_files\vs7_tests\regression\regression.vcproj
+
+Then do a rebuild all for either release or debug
+and you should be good to go.
+
+------------------------------------------------------------------
+
+* DARING AUTOBUILD FROM A BATCH FILE WAY
+
+If you're daring and you have doxygen installed 
+and want to automatically create the distribution
+for a version:
+
+Change your working directory to
+[build_files\vs7_build_bin_dist]
+
+and exectute build_dist.bat to create a distribution
+of RebeccaAIML into C:\ 
