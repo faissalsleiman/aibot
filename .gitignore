@@ -1,3 +1,29 @@
+### C++ ignores below ###
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+### Java ignores below ###
+
 *.class
 
 # Mobile Tools for Java (J2ME)
