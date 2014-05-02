@@ -8,6 +8,9 @@
 #include <iostream>
 using namespace std;
 
+//Xerces includes
+XERCES_CPP_NAMESPACE_USE
+
 //Boost includes
 #include <boost/filesystem/operations.hpp>
 using namespace boost::filesystem;
@@ -138,14 +141,14 @@ void TestCases::conductTesting()
 				String SchemaLoc = "http://alicebot.org/2001/AIML-1.0.1 " + m_testSchema;
 
 				m_testParser->setDoSchema(true);
-				m_testParser->setDoValidation(true);    // optional.
+			  m_testParser->setValidationScheme(SAXParser::Val_Always);    // optional.
 				m_testParser->setDoNamespaces(true);    // optional
 				m_testParser->setExternalSchemaLocation(SchemaLoc.c_str());
 			}
 			else
 			{
 				m_testParser->setDoSchema(false);
-				m_testParser->setDoValidation(false);    // optional.
+			  m_testParser->setValidationScheme(SAXParser::Val_Always);    // optional.
 				m_testParser->setDoNamespaces(false);    // optional
 			}
 

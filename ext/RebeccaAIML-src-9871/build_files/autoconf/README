@@ -1,0 +1,10 @@
+
+When running configure with user-local libraries (boost or xerces), use
+environment variables LIBRARY_PATH, CPLUS_INCLUDE_PATH and compiler/linker
+variables CFLAGS, CPPFLAGS, LDFLAGS as follows:
+
+> LIBRARY_PATH=$HOME/install/lib CPLUS_INCLUDE_PATH=$HOME/install/include ./configure --prefix=$HOME/projects/aibot/tools/aibot/build CFLAGS=-I$HOME/install/include CPPFLAGS=-I$HOME/install/include LDFLAGS=-L$HOME/install/lib
+
+Then make as follows:
+
+> make install

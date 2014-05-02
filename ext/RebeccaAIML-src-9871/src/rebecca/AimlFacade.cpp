@@ -52,7 +52,7 @@ AimlFacade::AimlFacade() throw(Exception &)
 		scoped_ptr<Factory> factory(Factory::createFactory());
 		m_graphBuilder = factory->createGraphBuilder();	
 	}
-	catch(exception &e)
+	catch(std::exception &e)
 	{
 		throw ExceptionImpl(e.what());
 	}

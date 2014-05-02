@@ -47,6 +47,10 @@
    (-lboost_filesystem). */
 #undef HAVE_LIBBOOST_FILESYSTEM
 
+/* Define to 1 if you have the `boost_system' library
+   (-lboost_system). */
+#undef HAVE_LIBBOOST_SYSTEM
+
 /* Define to 1 if you have the `boost_regex' library (-lboost_regex). */
 #undef HAVE_LIBBOOST_REGEX
 

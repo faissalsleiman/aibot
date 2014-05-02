@@ -26,6 +26,9 @@
 #include <rebecca/exports.h>
 #include <rebecca/Exceptions.h>
 
+//To get size_t
+#include <cstddef>
+
 /* Disable Windows VC 7.x warning about 
  * it ignoring the throw specification
  */
@@ -193,7 +196,7 @@ class REBECCA_EXPORT AimlFacade
 		 *
 		 * \return An instance of this object
 		 */
-		void *operator new(unsigned int size);
+		void *operator new(std::size_t size);
 
 
 	private:

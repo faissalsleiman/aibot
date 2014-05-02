@@ -53,7 +53,7 @@ StringPimpl::StringPimpl() throw(Exception &)
 	{
 		m_pimpl = new StringPrivate;
 	}
-	catch(exception &e)
+	catch(std::exception &e)
 	{
 		throw ExceptionImpl(e.what());
 	}
@@ -66,7 +66,7 @@ StringPimpl::StringPimpl(const char * const stringPimpl) throw(Exception &)
 	{
 		init(stringPimpl);
 	}
-	catch(exception &e)
+	catch(std::exception &e)
 	{
 		throw ExceptionImpl(e.what());
 	}
@@ -95,7 +95,7 @@ StringPimpl::StringPimpl(const StringPimpl& stringPimpl)
 	{
 		init(stringPimpl.c_str());
 	}
-	catch(exception &e)
+	catch(std::exception &e)
 	{
 		throw ExceptionImpl(e.what());
 	}
@@ -107,7 +107,7 @@ bool StringPimpl::empty() const throw(Exception &)
 	{
 		return m_pimpl->proxy.empty();
 	}
-	catch(exception &e)
+	catch(std::exception &e)
 	{
 		throw ExceptionImpl(e.what());
 	}

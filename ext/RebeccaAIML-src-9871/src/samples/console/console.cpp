@@ -4,6 +4,7 @@
 using namespace rebecca;
 
 //Std includes
+#include <cstdlib> //for exit()
 #include <iostream>
 #include <string>
 using namespace std;

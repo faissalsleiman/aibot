@@ -22,11 +22,12 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-
 //To get the REBECA_EXPORT macro
 #include <rebecca/exports.h>
-
 #include <rebecca/Exceptions.h>
+
+//To get size_t
+#include <cstddef>
 
 /* Disable Windows VC 7.x warning about 
  * it ignoring the throw specification
@@ -218,7 +219,7 @@ class REBECCA_EXPORT StringPimpl
 		 *
 		 * \return An instance of this object
 		 */
-		void *operator new(unsigned int size);
+		void *operator new(std::size_t size);
 
 	private:
 
