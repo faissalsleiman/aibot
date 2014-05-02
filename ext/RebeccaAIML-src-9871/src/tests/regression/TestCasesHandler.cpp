@@ -214,7 +214,7 @@ void TestCasesHandler::startElement(const XMLCh* const name, AttributeList& attr
 }
 
 void TestCasesHandler::characters(const XMLCh * const chars, 
-                                  const unsigned int length)
+                                  const XMLSize_t length)
 {
 	try
 	{

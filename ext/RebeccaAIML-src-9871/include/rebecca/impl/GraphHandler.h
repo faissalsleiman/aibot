@@ -56,7 +56,7 @@ class GraphHandler : public HandlerBase
 		//Call back's from the sax parser
 
 		GraphHandler(NodeMapper &root, GraphBuilderInternal &builder);
-		void characters(const XMLCh *const chars, const unsigned int length);
+		void characters(const XMLCh *const chars, const XMLSize_t length);
 		void startElement(const XMLCh* const, AttributeList&);
 		void endElement(const XMLCh *const name);
 		void endDocument();

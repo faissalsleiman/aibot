@@ -277,10 +277,10 @@ shared_ptr<Tag> GraphHandler::createTagClass(const String &className)
 
 
 void GraphHandler::characters(const XMLCh * const chars, 
-                              const unsigned int length)
+                              const XMLSize_t length)
 {
 	LOG_BOT_METHOD("void GraphHandler::characters(const XMLCh * const chars,"
-		                                         "const unsigned int length)");
+		                                         "const XMLSize_t length)");
 	try
 	{
 		Transcode someChars(chars);

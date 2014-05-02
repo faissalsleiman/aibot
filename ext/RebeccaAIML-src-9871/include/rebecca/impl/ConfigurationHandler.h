@@ -160,7 +160,7 @@ class ConfigurationHandler : public HandlerBase
 		ConfigurationHandler(GraphBuilderInternal &builder);
 
 		//Call back's from the sax parser
-		virtual void characters(const XMLCh *const chars, const unsigned int length);
+		virtual void characters(const XMLCh *const chars, const XMLSize_t length);
 		virtual void startElement(const XMLCh* const, AttributeList&);
 		virtual void endElement(const XMLCh *const name);
 		virtual void endDocument();

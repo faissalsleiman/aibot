@@ -248,7 +248,7 @@ class TestCasesHandler : public HandlerBase
 		};
 
 		void startElement(const XMLCh* const name, AttributeList& attributes);
-		void characters(const XMLCh * const chars, const unsigned int length);
+		void characters(const XMLCh * const chars, const XMLSize_t length);
 
 		void endElement(const XMLCh *const name);
 

@@ -47,9 +47,9 @@ ConfigurationHandler::ConfigurationHandler(GraphBuilderInternal &builder)
 	LOG_BOT_METHOD("ConfigurationHandler::ConfigurationHandler()");
 }
 
-void ConfigurationHandler::characters(const XMLCh *const chars, const unsigned int length)
+void ConfigurationHandler::characters(const XMLCh *const chars, const XMLSize_t length)
 {
-	LOG_BOT_METHOD("void ConfigurationHandler::characters(const XMLCh *const chars, const unsigned int length)");
+	LOG_BOT_METHOD("void ConfigurationHandler::characters(const XMLCh *const chars, const XMLSize_t length)");
 	logging("Warning, This should not be called");
 }
 
