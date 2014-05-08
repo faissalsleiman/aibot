@@ -214,3 +214,9 @@ ext/RebeccaAIML-src-9871/doc/doxygen/api+framework+samples/
 ext/RebeccaAIML-src-9871/doc/doxygen/api+framework/
 ext/RebeccaAIML-src-9871/doc/doxygen/api+samples/
 ext/RebeccaAIML-src-9871/doc/doxygen/api/
+ext/RebeccaAIML-src-9871/bin/release/qtgui
+ext/RebeccaAIML-src-9871/build_files/autoconf/qtgui/Makefile
+ext/RebeccaAIML-src-9871/build_files/autoconf/qtgui/config.h
+ext/RebeccaAIML-src-9871/build_files/autoconf/qtgui/config.status
+ext/RebeccaAIML-src-9871/build_files/autoconf/qtgui/scripts/qtgui.pro
+ext/RebeccaAIML-src-9871/build_files/autoconf/qtgui/stamp-h1
