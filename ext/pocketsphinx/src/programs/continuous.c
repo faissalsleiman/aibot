@@ -235,7 +235,8 @@ recognize_from_microphone()
 {
     ad_rec_t *ad;
     int16 adbuf[4096];
-    int32 k, ts, rem;
+    int32 k, ts, rem , probability ,timestampFirstBlock;
+    int32 maxListenTime = 50000; //50000 = 5 secs
     char const *hyp;
     char const *uttid;
     cont_ad_t *cont;
@@ -278,6 +279,9 @@ recognize_from_microphone()
 
         /* Note timestamp for this first block of data */
         ts = cont->read_ts;
+        
+        /* Added by hadi */
+	timestampFirstBlock = ts;
 
         /* Decode utterance until end (marked by a "long" silence, >1sec) */
         for (;;) {
@@ -295,6 +299,12 @@ recognize_from_microphone()
             else {
                 /* New speech data received; note current timestamp */
                 ts = cont->read_ts;
+                
+                /* Added by hadi */
+                if ((ts - timestampFirstBlock) > maxListenTime)
+		{
+			break;
+		}
             }
 
             /*
@@ -320,8 +330,10 @@ recognize_from_microphone()
         /* Finish decoding, obtain and print result */
         ps_end_utt(ps);
         hyp = ps_get_hyp(ps, NULL, &uttid);
-        printf("%s: %s\n", uttid, hyp);
+        printf("%s: %s\n", uttid, hyp); //hyp is the recognized text
         fflush(stdout);
+
+        printf("Probability Float: %f\n", logmath_exp(ps_get_logmath(ps), ps_get_prob(ps, &uttid)));
 
         /* Exit if the first word spoken was GOODBYE */
         if (hyp) {
