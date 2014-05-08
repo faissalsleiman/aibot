@@ -63,15 +63,15 @@ int main()
         // i.e. in this case it is 5 which means 5 clients connection requests will be held pending while
         // the server is already processing another connection request.
         listen(sock_descriptor, 5);
- 
-        cout << "Waiting for Connection..." << endl;
-        int size = sizeof(client_addr);
+ 	int size = sizeof(client_addr);
+        
 
         // Server blocks on this call until a client tries to establish connection.
         // When a connection is established, it returns a 'connected socket descriptor' different
         // from the one created earlier.
 	while(1)
 	{
+	    cout << "Waiting for Connection..." << endl;
 	    conn_desc = accept(sock_descriptor, (struct sockaddr *)&client_addr, (socklen_t *) &size);         
 	    if (conn_desc == -1)
 		    cout << "Failed Accepting Connection..." << endl;
