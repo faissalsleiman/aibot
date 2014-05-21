@@ -26,6 +26,10 @@
 #include <rebecca/Exceptions.h>
 #include <rebecca/adt/String.h>
 
+//Std includes
+#include <memory>
+using std::shared_ptr;
+
 //Disable Windows VC 7.x warning about 
 //dllinterface with's
 #ifdef _WIN32

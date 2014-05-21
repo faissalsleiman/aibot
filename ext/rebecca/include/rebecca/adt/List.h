@@ -23,6 +23,7 @@
  */
 
 //Stl includes
+#include <memory>
 #include <list>
 
 namespace rebecca
@@ -45,6 +46,7 @@ using rebecca::framework::impl::Li;
 namespace adt
 {
 
+using std::shared_ptr;
 using namespace rebecca::impl;
 
 template< typename T >

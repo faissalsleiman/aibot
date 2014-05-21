@@ -37,12 +37,16 @@
 #include <rebecca/exports.h>
 #include <rebecca/Exceptions.h>
 
+//Std includes
+#include <memory>
+
 namespace rebecca
 {
 namespace framework
 {
 namespace impl
 {
+using std::shared_ptr;
 
 /*
  * Forward declerations

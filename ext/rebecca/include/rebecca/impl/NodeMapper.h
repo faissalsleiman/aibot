@@ -32,6 +32,9 @@
 #include <rebecca/adt/Map.h>
 #include <rebecca/impl/utils/Logging.h>
 
+//Std includes
+#include <memory>
+
 namespace rebecca
 {
 namespace impl
@@ -41,6 +44,7 @@ namespace impl
  */
 class GraphBuilderInternal;
 
+using std::shared_ptr;
 using namespace boost;
 using namespace rebecca::framework;
 	

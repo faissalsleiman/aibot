@@ -35,6 +35,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <memory>
 
 /* Disable Windows VC 7.x warning about 
  * it ignoring the throw specification

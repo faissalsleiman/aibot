@@ -38,6 +38,9 @@
 //Boost includes
 #include <boost/enable_shared_from_this.hpp>
 
+//Std includes
+#include <memory>
+
 namespace rebecca
 {
 namespace framework
@@ -45,6 +48,7 @@ namespace framework
 namespace impl
 {
 
+using std::shared_ptr;
 using namespace boost;
 
 /*

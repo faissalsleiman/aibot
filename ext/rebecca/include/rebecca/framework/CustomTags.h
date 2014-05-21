@@ -36,12 +36,17 @@
 #include <rebecca/framework/Tag.h>
 #include <rebecca/framework/GraphBuilderFramework.h>
 
+//Std includes
+#include <memory>
+
 namespace rebecca
 {
 namespace framework
 {
 namespace impl
 {
+
+using std::shared_ptr;
 
 /**
  * The class to inherit from

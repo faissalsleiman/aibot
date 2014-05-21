@@ -35,12 +35,16 @@
 //Rebecca includes
 #include <rebecca/framework/InnerCategory.h>
 
+//Std includes
+#include <memory>
+
 namespace rebecca
 {
 namespace framework
 {
 namespace impl
 {
+using std::shared_ptr;
 
 /*
  * Forward declerations

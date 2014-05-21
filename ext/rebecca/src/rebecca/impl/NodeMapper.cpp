@@ -33,6 +33,7 @@ using namespace boost;
 
 //Std includes
 #include <iostream>
+#include <memory>
 using namespace std;
 
 namespace rebecca

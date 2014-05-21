@@ -26,6 +26,7 @@
 #include <rebecca/adt/String.h>
 
 //Std includes
+#include <memory>
 #include <stack>
 
 namespace rebecca
@@ -47,6 +48,7 @@ using rebecca::framework::impl::Tag;
 
 namespace adt
 {
+using std::shared_ptr;
 using namespace rebecca::impl;
 
 template< typename T >

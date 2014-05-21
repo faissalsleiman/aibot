@@ -24,6 +24,7 @@
 
 //Stl includes
 #include <map>
+#include <memory>
 
 //Rebecca includes
 #include <rebecca/adt/String.h>
@@ -38,6 +39,7 @@ class NodeMapper;
 
 namespace adt
 {
+using std::shared_ptr;
 using namespace rebecca::impl;
 
 template< typename T, typename U >

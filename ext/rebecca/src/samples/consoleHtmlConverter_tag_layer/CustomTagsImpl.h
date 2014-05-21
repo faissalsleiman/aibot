@@ -41,6 +41,7 @@
 
 //Std lncludes
 #include <map>
+#include <memory>
 
 /**
  * Our customTag namespace 

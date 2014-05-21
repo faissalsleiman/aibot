@@ -23,6 +23,7 @@
  */
 
 //Std includes
+#include <memory>
 #include <vector>
 
 //Rebecca includes
@@ -51,6 +52,7 @@ using framework::impl::InnerTemplate;
 
 namespace adt
 {
+using std::shared_ptr;
 using rebecca::impl::InnerTemplate;
 
 template< typename T >

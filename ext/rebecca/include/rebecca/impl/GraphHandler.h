@@ -32,6 +32,9 @@
 #include <rebecca/impl/NodeMapper.h>
 #include <rebecca/framework/Tag.h>
 
+//Std includes
+#include <memory>
+
 namespace rebecca
 {
 namespace impl
