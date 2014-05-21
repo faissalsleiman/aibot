@@ -39,7 +39,6 @@ hs_err_pid*
 
 
 # generated files
-build/
 ext/pocketsphinx/Makefile
 ext/pocketsphinx/config.log
 ext/pocketsphinx/config.status
