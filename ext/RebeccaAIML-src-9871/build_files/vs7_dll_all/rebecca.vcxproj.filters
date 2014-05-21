@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{e895ab22-3a5e-4c6f-b2be-6d1e3302c939}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\rebecca">
+      <UniqueIdentifier>{bb3e546d-de98-4192-bed6-3fa9693665f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rebecca\impl">
+      <UniqueIdentifier>{d1b35bf7-5a12-4d7c-9e4c-8a1cb9ff0eee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rebecca\impl\utils">
+      <UniqueIdentifier>{1622b40f-c921-4468-b68b-89feb5433e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rebecca\framework">
+      <UniqueIdentifier>{7fe61b0f-9e70-4a55-9587-3dee00f0675e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5731874d-7b32-4aca-802d-24bdc69e20d0}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\rebecca_h">
+      <UniqueIdentifier>{4acf54ef-6d7b-45e8-a7ef-9b09bba7d3f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rebecca_h\adt_h">
+      <UniqueIdentifier>{36c8737e-98a1-4b90-bbde-665b0fc21163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rebecca_h\impl_h">
+      <UniqueIdentifier>{9af0ede6-dcdd-4ae6-84e8-0a9be219ba21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rebecca_h\impl_h\utils_h">
+      <UniqueIdentifier>{175f3cbb-2902-43c7-ac42-9859b70cda41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rebecca_h\framework">
+      <UniqueIdentifier>{a1b0d17e-949e-4fc0-b253-6bee823c2f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{95eb0a19-6c9c-4b5a-acb4-8c91d139eaf1}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\rebecca\AimlFacade.cpp">
+      <Filter>Source Files\rebecca</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\GraphBuilder.cpp">
+      <Filter>Source Files\rebecca</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\StringPimpl.cpp">
+      <Filter>Source Files\rebecca</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\ConfigurationHandler.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\ConfigurationHandlerError.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\CustomTagWithDelete.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\Factory.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\getStringFromSentence.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\GraphBuilderAIML.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\GraphBuilderInternal.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\GraphHandler.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\GraphHandlerError.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\NodeMapper.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\PrototypeFactory.cpp">
+      <Filter>Source Files\rebecca\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\utils\Logging.cpp">
+      <Filter>Source Files\rebecca\impl\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\utils\StackTrace.cpp">
+      <Filter>Source Files\rebecca\impl\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\utils\Transcode.cpp">
+      <Filter>Source Files\rebecca\impl\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\AIML.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Bot.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Category.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Condition.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Date.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Formal.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Gender.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Get.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Gossip.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\GraphBuilderFramework.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Id.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\InnerAIML.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\InnerCategory.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\InnerTemplaListImpl.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\InnerTemplate.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\InnerTopic.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Input.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Learn.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Li.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\LowerCase.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\NonImplemented.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Pattern.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\PatternSideThat.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Person.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Person2.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\PlainWord.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Random.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Sentence.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Set.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Size.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Srai.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Star.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\System.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Tag.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Template.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\TemplateSideThat.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\ThatStar.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Think.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Topic.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\TopicStar.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\UpperCase.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\Version.cpp">
+      <Filter>Source Files\rebecca\framework</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\rebecca\AimlFacade.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\all.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\CallBacks.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\Exceptions.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\exports.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\GraphBuilder.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\StringPimpl.h">
+      <Filter>Header Files\rebecca_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\Deque.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\List.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\Map.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\Queue.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\Stack.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\String.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\adt\Vector.h">
+      <Filter>Header Files\rebecca_h\adt_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\ConfigurationHandler.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\ConfigurationHandlerError.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\CustomTagWithDelete.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\Exceptions.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\Factory.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\getStringFromSentence.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\GraphBuilderAIML.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\GraphBuilderInternal.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\GraphBuilderInternalNoOps.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\GraphHandler.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\GraphHandlerError.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\NodeMapper.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\PrototypeFactory.h">
+      <Filter>Header Files\rebecca_h\impl_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\utils\Logging.h">
+      <Filter>Header Files\rebecca_h\impl_h\utils_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\utils\StackTrace.h">
+      <Filter>Header Files\rebecca_h\impl_h\utils_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\impl\utils\Transcode.h">
+      <Filter>Header Files\rebecca_h\impl_h\utils_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\AIML.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Bot.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Category.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Condition.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\CustomTags.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Date.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Formal.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Gender.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Get.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Gossip.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\GraphBuilderFramework.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Id.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\InnerAIML.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\InnerCategory.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\InnerTemplate.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\InnerTemplateListImpl.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\InnerTopic.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Input.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Learn.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Li.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\LowerCase.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\NonImplemented.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Pattern.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\PatternSideThat.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Person.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Person2.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\PlainWord.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Random.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Sentence.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Set.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Size.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Srai.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Star.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\System.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Tag.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Template.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\TemplateSideThat.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\ThatStar.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Think.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Topic.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\TopicStar.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\UpperCase.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rebecca\framework\Version.h">
+      <Filter>Header Files\rebecca_h\framework</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

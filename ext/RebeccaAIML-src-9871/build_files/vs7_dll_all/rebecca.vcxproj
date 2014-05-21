@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}</ProjectGuid>
+    <SccProjectName />
+    <SccLocalPath />
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\..\..\bin\release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\..\..\bin\debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(XERCES_INCLUDE);..\..\include;$(BOOST_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeaderOutputFile>.\Release/rebecca.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;xerces-c_2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\bin\release\rebecca-mt.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(XERCES_LIB);$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\..\..\bin\release/rebecca-mt.pdb</ProgramDatabaseFile>
+      <ImportLibrary>.\..\..\bin\release/rebecca-mt.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\..\..\bin\release/rebecca.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <PreBuildEvent>
+      <Command>%40echo off
+
+if X%25BOOST_INCLUDE%25==X goto HOWTORUN
+if X%25BOOST_LIB%25 == X goto HOWTORUN
+if X%25BOOST_LIBD%25 == X goto HOWTORUN
+if X%25XERCES_LIB%25 == X goto HOWTORUN
+if X%25XERCES_LIBD%25 == X goto HOWTORUN
+if X%25XERCES_INCLUDE%25 == X goto HOWTORUN
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo XERCES_LIB -- Point this to the location of your xerces release library.
+echo XERCES_LIBD -- Point this to the location of your xerces debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
+echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That%27s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+</Command>
+    </PreBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(XERCES_INCLUDE);..\..\include;$(BOOST_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeaderOutputFile>.\Debug/rebecca.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;xerces-c_2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\bin\debug\rebecca-mtD.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(XERCES_LIBD);$(BOOST_LIBD);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\..\..\bin\debug/rebecca-mt.pdb</ProgramDatabaseFile>
+      <ImportLibrary>.\..\..\bin\debug/rebecca-mtD.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\..\..\bin\debug/rebecca.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <PreBuildEvent>
+      <Command>%40echo off
+
+if X%25BOOST_INCLUDE%25==X goto HOWTORUN
+if X%25BOOST_LIB%25 == X goto HOWTORUN
+if X%25BOOST_LIBD%25 == X goto HOWTORUN
+if X%25XERCES_LIB%25 == X goto HOWTORUN
+if X%25XERCES_LIBD%25 == X goto HOWTORUN
+if X%25XERCES_INCLUDE%25 == X goto HOWTORUN
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo XERCES_LIB -- Point this to the location of your xerces release library.
+echo XERCES_LIBD -- Point this to the location of your xerces debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
+echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That%27s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+</Command>
+    </PreBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\rebecca\AimlFacade.cpp" />
+    <ClCompile Include="..\..\src\rebecca\GraphBuilder.cpp" />
+    <ClCompile Include="..\..\src\rebecca\StringPimpl.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\ConfigurationHandler.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\ConfigurationHandlerError.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\CustomTagWithDelete.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\Factory.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\getStringFromSentence.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\GraphBuilderAIML.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\GraphBuilderInternal.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\GraphHandler.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\GraphHandlerError.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\NodeMapper.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\PrototypeFactory.cpp" />
+    <ClCompile Include="..\..\src\rebecca\impl\utils\Logging.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\utils\StackTrace.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\impl\utils\Transcode.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;NDEBUG;_WINDOWS;_MBCS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rebecca\framework\AIML.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Bot.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Category.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Condition.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Date.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Formal.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Gender.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Get.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Gossip.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\GraphBuilderFramework.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Id.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\InnerAIML.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\InnerCategory.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\InnerTemplaListImpl.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\InnerTemplate.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\InnerTopic.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Input.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Learn.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Li.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\LowerCase.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\NonImplemented.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Pattern.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\PatternSideThat.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Person.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Person2.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\PlainWord.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Random.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Sentence.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Set.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Size.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Srai.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Star.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\System.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Tag.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Template.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\TemplateSideThat.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\ThatStar.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Think.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Topic.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\TopicStar.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\UpperCase.cpp" />
+    <ClCompile Include="..\..\src\rebecca\framework\Version.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\rebecca\AimlFacade.h" />
+    <ClInclude Include="..\..\include\rebecca\all.h" />
+    <ClInclude Include="..\..\include\rebecca\CallBacks.h" />
+    <ClInclude Include="..\..\include\rebecca\Exceptions.h" />
+    <ClInclude Include="..\..\include\rebecca\exports.h" />
+    <ClInclude Include="..\..\include\rebecca\GraphBuilder.h" />
+    <ClInclude Include="..\..\include\rebecca\StringPimpl.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\Deque.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\List.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\Map.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\Queue.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\Stack.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\String.h" />
+    <ClInclude Include="..\..\include\rebecca\adt\Vector.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\ConfigurationHandler.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\ConfigurationHandlerError.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\CustomTagWithDelete.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\Exceptions.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\Factory.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\getStringFromSentence.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\GraphBuilderAIML.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\GraphBuilderInternal.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\GraphBuilderInternalNoOps.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\GraphHandler.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\GraphHandlerError.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\NodeMapper.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\PrototypeFactory.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\utils\Logging.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\utils\StackTrace.h" />
+    <ClInclude Include="..\..\include\rebecca\impl\utils\Transcode.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\AIML.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Bot.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Category.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Condition.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\CustomTags.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Date.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Formal.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Gender.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Get.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Gossip.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\GraphBuilderFramework.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Id.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\InnerAIML.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\InnerCategory.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\InnerTemplate.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\InnerTemplateListImpl.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\InnerTopic.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Input.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Learn.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Li.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\LowerCase.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\NonImplemented.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Pattern.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\PatternSideThat.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Person.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Person2.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\PlainWord.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Random.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Sentence.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Set.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Size.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Srai.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Star.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\System.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Tag.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Template.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\TemplateSideThat.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\ThatStar.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Think.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Topic.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\TopicStar.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\UpperCase.h" />
+    <ClInclude Include="..\..\include\rebecca\framework\Version.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

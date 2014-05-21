@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{ED78D986-F2D6-4255-A0EE-5B6C8C9A97B1}</ProjectGuid>
+    <RootNamespace>customHtmlTagLayer</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;$(BOOST_INCLUDE);$(XERCES_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CUSTOMTAGLAYER_EXPORTS;BOOST_LIB_DIAGNOSTIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>rebecca-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\release\customHtmlTagLayer.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\release;$(BOOST_LIBD);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)customHtmlTagLayer.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)customHtmlTagLayer.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PreBuildEvent>
+      <Command>%40echo off
+
+if X%25BOOST_INCLUDE%25==X goto HOWTORUN
+if X%25BOOST_LIB%25 == X goto HOWTORUN
+if X%25BOOST_LIBD%25 == X goto HOWTORUN
+
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That%27s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(BOOST_INCLUDE);$(XERCES_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CUSTOMTAGLAYER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>rebecca-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\release\customHtmlTagLayer.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\release;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)customHtmlTagLayer.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PreBuildEvent>
+      <Command>%40echo off
+
+if X%25BOOST_INCLUDE%25==X goto HOWTORUN
+if X%25BOOST_LIB%25 == X goto HOWTORUN
+if X%25BOOST_LIBD%25 == X goto HOWTORUN
+
+
+goto END
+
+:HOWTORUN
+echo For this sample to work, you have to install the C++ boost library and
+echo define a few variables.  You can get the most current boost library from
+echo http://www.boost.org/.  The variables you have to define are:
+echo.
+echo BOOST_INCLUDE -- Point this to the location of your boost header files.
+echo BOOST_LIB     -- Point this to the location of your boost release library.
+echo BOOST_LIBD    -- Point this to the location of your boost debug library.
+echo.
+echo For example, on a fresh install on the Windows platform I have them set
+echo to:
+echo.
+echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
+echo BOOST_LIB     : C:\Boost\lib
+echo BOOST_LIBD    : C:\Boost\lib
+echo.
+echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
+echo That%27s because by default Boost installs its debug and release library into
+echo the same directory.
+
+exit 1
+
+:END
+
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CustomAIML.cpp" />
+    <ClCompile Include="customTagLayer.cpp" />
+    <ClCompile Include="CustomTagsImpl.cpp" />
+    <ClCompile Include="CustomTopic.cpp" />
+    <ClCompile Include="Html.cpp" />
+    <ClCompile Include="InnerTemplateAIMLTags.cpp" />
+    <ClCompile Include="Links.cpp" />
+    <ClCompile Include="sanitizeString.cpp" />
+    <ClCompile Include="WebPage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CustomAIML.h" />
+    <ClInclude Include="CustomTagsImpl.h" />
+    <ClInclude Include="CustomTopic.h" />
+    <ClInclude Include="exports.h" />
+    <ClInclude Include="Html.h" />
+    <ClInclude Include="HtmlConverterInternalProgrammerErrorException.h" />
+    <ClInclude Include="InnerTemplateAIMLTags.h" />
+    <ClInclude Include="Links.h" />
+    <ClInclude Include="sanitizeString.h" />
+    <ClInclude Include="typedefs.h" />
+    <ClInclude Include="WebPage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\build_files\vs7_dll_all\rebecca.vcxproj">
+      <Project>{a4b590b9-f07e-4f47-b4c4-5ada93c6f3af}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
