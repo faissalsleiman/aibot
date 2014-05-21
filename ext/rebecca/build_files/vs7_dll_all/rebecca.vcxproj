@@ -14,6 +14,7 @@
     <ProjectGuid>{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}</ProjectGuid>
     <SccProjectName />
     <SccLocalPath />
+    <ProjectName>rebecca_library</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -140,7 +141,7 @@ exit 1
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(XERCES_INCLUDE);..\..\include;$(BOOST_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;BOT_USE_STACK_TRACE;BOT_USE_LOGGING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -154,8 +155,8 @@ exit 1
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;xerces-c_2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\bin\debug\rebecca-mtD.dll</OutputFile>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;xerces-c_3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\bin\debug\rebecca.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>$(XERCES_LIBD);$(BOOST_LIBD);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>

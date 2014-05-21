@@ -45,7 +45,7 @@ namespace impl
 
 XERCES_CPP_NAMESPACE_USE;
 using namespace rebecca::framework;
-using namespace boost;
+using std::shared_ptr;
 
 /*
  * Forward declerations

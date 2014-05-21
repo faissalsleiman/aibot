@@ -14,6 +14,7 @@
     <ProjectGuid>{F3DD2261-3A62-4118-B3C6-EF1D07C2900B}</ProjectGuid>
     <SccProjectName />
     <SccLocalPath />
+    <ProjectName>rebecca_graphbuilding</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

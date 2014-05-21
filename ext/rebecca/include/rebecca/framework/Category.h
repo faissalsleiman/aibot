@@ -41,8 +41,6 @@ namespace framework
 namespace impl
 {
 
-using namespace boost;
-
 /* 
  * Forward decleration
  */

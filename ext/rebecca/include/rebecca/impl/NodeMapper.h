@@ -45,6 +45,7 @@ namespace impl
 class GraphBuilderInternal;
 
 using std::shared_ptr;
+using std::enable_shared_from_this;
 using namespace boost;
 using namespace rebecca::framework;
 	

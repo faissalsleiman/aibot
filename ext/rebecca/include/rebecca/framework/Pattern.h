@@ -35,8 +35,8 @@
 //Rebecca includes
 #include <rebecca/framework/InnerCategory.h>
 
-//Boost includes
-#include <boost/enable_shared_from_this.hpp>
+//Std includes
+#include <memory>
 
 namespace rebecca
 {
@@ -61,7 +61,7 @@ namespace impl
  */
 class PatternImpl;
 
-using boost::enable_shared_from_this;
+using std::enable_shared_from_this;
 
 /**
  * AIML class that represents the 

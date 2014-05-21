@@ -30,6 +30,10 @@ using namespace rebecca::impl;
 #include <boost/algorithm/string.hpp>
 using namespace boost;
 
+//Std includes
+#include <memory>
+using std::static_pointer_cast;
+
 /* Disable Windows VC 7.x warning about 
  * it ignoring the throw specification
  */

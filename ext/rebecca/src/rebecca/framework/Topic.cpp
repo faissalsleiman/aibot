@@ -33,6 +33,9 @@ using namespace rebecca::impl;
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
 using namespace boost;
+
+//Std includes
+#include <memory>
 using namespace std;
 
 /* Disable Windows VC 7.x warning about 

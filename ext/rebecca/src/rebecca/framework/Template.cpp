@@ -30,6 +30,7 @@ using namespace rebecca::impl;
 
 //Std includes
 #include <iostream>
+#include <memory>
 using namespace std;
 
 //Boost includes

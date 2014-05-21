@@ -41,6 +41,10 @@ using namespace rebecca::impl;
 #include <boost/cast.hpp>
 using namespace boost;
 
+//Std includes
+#include <memory>
+using std::static_pointer_cast;
+
 namespace rebecca
 {
 namespace framework

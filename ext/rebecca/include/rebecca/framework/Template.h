@@ -35,9 +35,6 @@
 //Rebecca includes
 #include <rebecca/framework/InnerCategory.h>
 
-//Boost includes
-#include <boost/enable_shared_from_this.hpp>
-
 //Std includes
 #include <memory>
 
@@ -49,7 +46,7 @@ namespace impl
 {
 
 using std::shared_ptr;
-using namespace boost;
+using std::enable_shared_from_this;
 
 /*
  * Forward declerations

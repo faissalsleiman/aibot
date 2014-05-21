@@ -14,6 +14,7 @@
     <ProjectGuid>{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}</ProjectGuid>
     <RootNamespace>regression</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <ProjectName>rebecca_regression</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

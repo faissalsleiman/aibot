@@ -36,8 +36,8 @@
 #include <rebecca/framework/InnerCategory.h>
 #include <rebecca/framework/InnerTemplate.h>
 
-//Boost includes
-#include <boost/enable_shared_from_this.hpp>
+//Std includes
+#include <memory>
 
 namespace rebecca
 {
@@ -63,7 +63,7 @@ namespace impl
 class PatternSideThatImpl;
 class GraphBuilderFramework;	
 
-using boost::enable_shared_from_this;
+using std::enable_shared_from_this;
 
 /**
  * AIML class that represents the 

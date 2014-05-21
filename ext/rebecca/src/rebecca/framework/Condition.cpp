@@ -34,6 +34,10 @@ using namespace rebecca::impl;
 #include <boost/algorithm/string.hpp>
 using namespace boost;
 
+//Std includes
+#include <memory>
+using std::static_pointer_cast;
+
 /* Disable Windows VC 7.x warning about 
  * it ignoring the throw specification
  */
@@ -144,7 +148,7 @@ StringPimpl Condition::getString() const
 		{
 			if((*it)->instanceOf("Li"))
 			{
-				shared_ptr<Li> li = static_pointer_cast<Li>(*it);
+				shared_ptr<Li> li = std::static_pointer_cast<Li>(*it);
 				StringPimpl liPredicateName = li->getPredicateName();
 				StringPimpl liAimlPattern = li->getAimlPattern();
 
