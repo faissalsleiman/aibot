@@ -28,9 +28,6 @@
 //Rebecca includes
 #include <rebecca/adt/String.h>
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
 namespace rebecca
 {
 
@@ -41,10 +38,6 @@ class NodeMapper;
 
 namespace adt
 {
-
-
-	
-using namespace boost;
 using namespace rebecca::impl;
 
 template< typename T, typename U >

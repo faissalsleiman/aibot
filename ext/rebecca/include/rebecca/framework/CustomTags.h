@@ -32,9 +32,6 @@
 #    pragma warning( disable : 4290 )
 #endif
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
 //Rebecca includes
 #include <rebecca/framework/Tag.h>
 #include <rebecca/framework/GraphBuilderFramework.h>
@@ -45,8 +42,6 @@ namespace framework
 {
 namespace impl
 {
-
-using namespace boost;
 
 /**
  * The class to inherit from

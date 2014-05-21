@@ -28,9 +28,6 @@
 //Rebecca includes
 #include <rebecca/adt/String.h>
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
 namespace rebecca
 {
 
@@ -54,7 +51,6 @@ using framework::impl::InnerTemplate;
 
 namespace adt
 {
-using namespace boost;
 using rebecca::impl::InnerTemplate;
 
 template< typename T >

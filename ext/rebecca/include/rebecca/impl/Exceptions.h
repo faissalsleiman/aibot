@@ -26,9 +26,6 @@
 #include <rebecca/Exceptions.h>
 #include <rebecca/adt/String.h>
 
-#include <boost/shared_ptr.hpp>
-using namespace boost;
-
 //Disable Windows VC 7.x warning about 
 //dllinterface with's
 #ifdef _WIN32

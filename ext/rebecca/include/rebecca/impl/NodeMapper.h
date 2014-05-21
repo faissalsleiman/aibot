@@ -24,7 +24,6 @@
 
 //Boost includes
 #include <boost/algorithm/string.hpp>
-#include <boost/shared_ptr.hpp>
 
 //Rebecca includes
 #include <rebecca/framework/Template.h>

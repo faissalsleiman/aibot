@@ -26,7 +26,6 @@
 #include <rebecca/adt/Map.h>
 
 //Boost includes
-#include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>

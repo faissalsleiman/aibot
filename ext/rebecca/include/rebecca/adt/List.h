@@ -25,9 +25,6 @@
 //Stl includes
 #include <list>
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
 namespace rebecca
 {
 namespace framework
@@ -48,7 +45,6 @@ using rebecca::framework::impl::Li;
 namespace adt
 {
 
-using namespace boost; 
 using namespace rebecca::impl;
 
 template< typename T >

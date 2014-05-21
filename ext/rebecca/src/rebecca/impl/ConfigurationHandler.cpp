@@ -33,9 +33,6 @@
 #include <iostream>
 using namespace std;
 
-#include <boost/shared_ptr.hpp>
-using namespace boost;
-
 namespace rebecca
 {
 namespace impl

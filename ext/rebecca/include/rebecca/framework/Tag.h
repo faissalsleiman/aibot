@@ -37,18 +37,12 @@
 #include <rebecca/exports.h>
 #include <rebecca/Exceptions.h>
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
-
 namespace rebecca
 {
 namespace framework
 {
 namespace impl
 {
-
-using namespace boost;
 
 /*
  * Forward declerations

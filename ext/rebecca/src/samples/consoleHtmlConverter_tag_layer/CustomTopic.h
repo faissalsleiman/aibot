@@ -27,9 +27,6 @@
 #include <rebecca/StringPimpl.h>
 #include <rebecca/framework/GraphBuilderFramework.h>
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
 //Custom Tag includes
 #include "exports.h"
 #include "typedefs.h"
@@ -53,7 +50,6 @@ namespace impl
 
 using namespace rebecca::framework;
 using namespace rebecca;
-using namespace boost;
 using namespace std;
 
 /*

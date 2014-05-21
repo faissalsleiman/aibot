@@ -39,9 +39,6 @@
 #include "typedefs.h"
 #include "Html.h"
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
 //Std lncludes
 #include <map>
 
@@ -71,7 +68,6 @@ namespace impl
 ///@todo Put in the impl namespace and document it
 
 using namespace rebecca::framework;
-using namespace boost;
 using namespace std;
 
 /**

@@ -32,17 +32,12 @@
 #include <rebecca/impl/NodeMapper.h>
 #include <rebecca/framework/Tag.h>
 
-//Boost includes
-#include <boost/shared_ptr.hpp>
-
-
 namespace rebecca
 {
 namespace impl
 {
 
 XERCES_CPP_NAMESPACE_USE
-using namespace boost;
 using namespace rebecca;
 using namespace std;
 
