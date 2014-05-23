@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sapi.h>
 using namespace std;
 
 #include "aibot.h"
@@ -161,7 +162,7 @@ m_currentArgument(NO_ARG)
 		ps_config = cmd_ln_parse_file_r(NULL, cont_args_def, ps_argv[1], TRUE);
 	}
 	else {
-		ps_config = cmd_ln_parse_r(NULL, cont_args_def, ps_argc, ps_argv, FALSE);
+		ps_config = cmd_ln_parse_r(NULL, cont_args_def, ps_argc, ps_argv, TRUE);
 	}
 	/* Handle argument file as -argfile. */
 	if (ps_config && (cfg = cmd_ln_str_r(ps_config, "-argfile")) != NULL) {
@@ -169,6 +170,18 @@ m_currentArgument(NO_ARG)
 	}
 	if (ps_config == NULL)
 		exit(1);
+}
+
+std::wstring s2ws(const std::string& s)
+{
+	int len;
+	int slength = (int)s.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+	wchar_t* buf = new wchar_t[len];
+	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
+	std::wstring r(buf);
+	delete[] buf;
+	return r;
 }
 
 int main(int argc, char* argv[])
@@ -179,6 +192,17 @@ int main(int argc, char* argv[])
 	mic_data_t mic;
 
 	continuous_init(arguments, mic);
+
+	//Initialize Voice
+	ISpVoice * pVoice = NULL;
+
+	if (FAILED(::CoInitialize(NULL)))
+		return FALSE;
+
+	HRESULT hr = CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void **)&pVoice);
+
+	if (SUCCEEDED(hr))
+		std::cout << "Speech Initialized" << std::endl;
 
 	//Initialize Rebecca
 	AimlFacade aiml;
@@ -206,6 +230,8 @@ int main(int argc, char* argv[])
 
 		//Send the initial opening line of the bot
 		cout << botName << " says: " << response.c_str() << endl;
+		hr = pVoice->Speak(s2ws(response.c_str()).c_str(), 0, NULL);
+		pVoice->WaitUntilDone(15000);
 
 		/*
 		* The main loop to get the input
@@ -223,6 +249,9 @@ int main(int argc, char* argv[])
 				* out of the while(true) loop
 				*/
 				continuous_exit(mic);
+				pVoice->Release();
+				pVoice = NULL;
+				::CoUninitialize();
 				break;
 			}
 			else //The user gave an input to the bot
@@ -245,6 +274,8 @@ int main(int argc, char* argv[])
 
 				//Print out what Rebecca says.
 				cout << botName << " says: " << response.c_str() << endl;
+				hr = pVoice->Speak(s2ws(response.c_str()).c_str(), 0, NULL);
+				pVoice->WaitUntilDone(15000);
 			}
 		}
 	}
