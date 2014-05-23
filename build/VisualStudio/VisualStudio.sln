@@ -52,7 +52,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rebecca_customHtmlTagLayer"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rebecca_console", "..\..\ext\rebecca\src\samples\console\console.vcxproj", "{6642F358-EBF1-4B0A-9A09-3A001ABC1A33}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rebecca_library", "..\..\ext\rebecca\build_files\vs7_dll_all\rebecca.vcxproj", "{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rebecca", "..\..\ext\rebecca\build_files\vs7_dll_all\rebecca.vcxproj", "{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aibot_speech", "aibot_speech\aibot_speech.vcxproj", "{5C149C01-A969-4040-BC80-453451BF99C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{94001A0E-A837-445C-8004-F918F10D0226} = {94001A0E-A837-445C-8004-F918F10D0226}
+		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF} = {A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,19 +111,15 @@ Global
 		{AB08A7C9-D327-412E-AB38-1941949F5BE6}.Release|Win32.ActiveCfg = Release|Win32
 		{AB08A7C9-D327-412E-AB38-1941949F5BE6}.Release|Win32.Build.0 = Release|Win32
 		{F3DD2261-3A62-4118-B3C6-EF1D07C2900B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F3DD2261-3A62-4118-B3C6-EF1D07C2900B}.Debug|Win32.Build.0 = Debug|Win32
 		{F3DD2261-3A62-4118-B3C6-EF1D07C2900B}.Release|Win32.ActiveCfg = Release|Win32
 		{F3DD2261-3A62-4118-B3C6-EF1D07C2900B}.Release|Win32.Build.0 = Release|Win32
 		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Debug|Win32.ActiveCfg = Debug|Win32
-		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Debug|Win32.Build.0 = Debug|Win32
 		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Release|Win32.ActiveCfg = Release|Win32
 		{210A3AD4-68D5-41AC-9310-4AAFD9AA4FFD}.Release|Win32.Build.0 = Release|Win32
 		{A981A53F-F70F-499A-8000-B1979550481E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A981A53F-F70F-499A-8000-B1979550481E}.Debug|Win32.Build.0 = Debug|Win32
 		{A981A53F-F70F-499A-8000-B1979550481E}.Release|Win32.ActiveCfg = Release|Win32
 		{A981A53F-F70F-499A-8000-B1979550481E}.Release|Win32.Build.0 = Release|Win32
 		{ED78D986-F2D6-4255-A0EE-5B6C8C9A97B1}.Debug|Win32.ActiveCfg = Debug|Win32
-		{ED78D986-F2D6-4255-A0EE-5B6C8C9A97B1}.Debug|Win32.Build.0 = Debug|Win32
 		{ED78D986-F2D6-4255-A0EE-5B6C8C9A97B1}.Release|Win32.ActiveCfg = Release|Win32
 		{ED78D986-F2D6-4255-A0EE-5B6C8C9A97B1}.Release|Win32.Build.0 = Release|Win32
 		{6642F358-EBF1-4B0A-9A09-3A001ABC1A33}.Debug|Win32.ActiveCfg = Debug|Win32
@@ -128,6 +130,10 @@ Global
 		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Debug|Win32.Build.0 = Debug|Win32
 		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Release|Win32.ActiveCfg = Release|Win32
 		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}.Release|Win32.Build.0 = Release|Win32
+		{5C149C01-A969-4040-BC80-453451BF99C4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5C149C01-A969-4040-BC80-453451BF99C4}.Debug|Win32.Build.0 = Debug|Win32
+		{5C149C01-A969-4040-BC80-453451BF99C4}.Release|Win32.ActiveCfg = Release|Win32
+		{5C149C01-A969-4040-BC80-453451BF99C4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

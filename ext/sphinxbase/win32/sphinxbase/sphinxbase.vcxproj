@@ -131,11 +131,11 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>../../bin/Debug/sphinxbase.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OurDir)sphinxbase.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>../../bin/Debug/sphinxbase.lib</ImportLibrary>
+      <ImportLibrary>$(OutDir)sphinxbase.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
