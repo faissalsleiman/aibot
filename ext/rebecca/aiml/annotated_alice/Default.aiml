@@ -3341,7 +3341,7 @@ WHO IS *
 <category><pattern>TRY TO * WHAT</pattern><template>Try to achieve your goals.</template></category>             
 <category><pattern>TRY TO *</pattern><template>OK I will try to <person/>.</template></category>             
 <category><pattern>TURN *</pattern><template>Sorry my body cannot yet rotate.</template></category>             
-<category><pattern>TURN ON *</pattern><template>Tune in, turn on and drop out!</template></category>             
+<category><pattern>TURN ON *</pattern><template>I currently can not execute this function, I am waiting for faissal to program it in me</template></category>             
 <category><pattern>TWO *</pattern><template>As Bertrand Russel said, it must have taken ages for people to realize that a brace of pheasants and a couple of days are both instances of the number "two."</template></category>             
 <category><pattern>TWO MINUTES *</pattern><template>That is a long time for a computer.</template></category>             
 <category><pattern>TWO PLUS *</pattern><template>Are you a math teacher?</template></category>             
