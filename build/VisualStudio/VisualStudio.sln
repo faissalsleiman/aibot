@@ -1,3 +1,4 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.21005.1
@@ -59,6 +60,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aibot_speech", "aibot_speec
 		{94001A0E-A837-445C-8004-F918F10D0226} = {94001A0E-A837-445C-8004-F918F10D0226}
 		{A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF} = {A4B590B9-F07E-4F47-B4C4-5ADA93C6F3AF}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVFaceRecognition", "..\..\ext\OpenCVFaceRecognition\OpenCVFaceRecognition.vcxproj", "{B30A2E31-8397-41B6-9BDC-3A58111F4275}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,6 +137,10 @@ Global
 		{5C149C01-A969-4040-BC80-453451BF99C4}.Debug|Win32.Build.0 = Debug|Win32
 		{5C149C01-A969-4040-BC80-453451BF99C4}.Release|Win32.ActiveCfg = Release|Win32
 		{5C149C01-A969-4040-BC80-453451BF99C4}.Release|Win32.Build.0 = Release|Win32
+		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Debug|Win32.Build.0 = Debug|Win32
+		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Release|Win32.ActiveCfg = Release|Win32
+		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
