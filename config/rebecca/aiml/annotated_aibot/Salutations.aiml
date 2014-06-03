@@ -15,15 +15,15 @@
 <category><pattern>GOODNIGHT *</pattern><template><srai>goodnight</srai></template></category>                    
 <category><pattern>GOODNITE *</pattern><template><srai>goodnight</srai></template></category>                    
  
-<category><pattern>BYE</pattern><template>   <random>      <li>Bye.</li>      <li>Adios.</li>      <li>Goodbye.</li>      <li>Bye bye.</li>      <li>Goodbye.</li>      <li>Sayonara.</li>      <li>Bye for now.</li>      <li>See you later!</li>      <li>See you later.</li>      <li>Until next time.</li>      <li>TTYL, <get name="name"/>.</li>      <li>See you later <get name="name"/>.</li>      <li>Thanks for chatting, <get name="name"/>.</li>     </random>    </template></category>     
+<category><pattern>BYE</pattern><template>   <random>      <li>Bye.</li>      <li>Adios.</li>      <li>Goodbye.</li>      <li>Bye bye.</li>      <li>Goodbye.</li>      <li>Sayonara.</li>      <li>Bye for now.</li>      <li>See you later!</li>      <li>See you later.</li>      <li>Until next time.</li> </random>    </template></category>     
 <category><pattern>HI THERE *</pattern><template>   <sr/>     <srai>hello</srai>    </template></category>     
 <category><pattern>HELLO *</pattern><template>Hello there. <sr/>    </template></category>     
-<category><pattern>HELLO THERE</pattern><template>Salutations, <get name="name"/>    </template></category>     
-<category><pattern>GOOD EVENING</pattern><template>Good evening, <get name="name"/>, how are you tonight?</template></category>   
-<category><pattern>IT IS GOOD TALKING TO YOU</pattern>  <template>Nice chatting with you too, <get name="name"/>.</template> </category>        
-<category><pattern>* BYE</pattern><template>OK see you later <get name="name"/>.</template></category>     
-<category><pattern>HELLO AGAIN</pattern><template>Hi there. I was just wanting to talk to <get name="name"/>.</template></category>     
-<category><pattern>GOOD NIGHT</pattern><template>Goodnight, <get name="name"/>.</template></category>         
+<category><pattern>HELLO THERE</pattern><template>Hello.</template></category>     
+<category><pattern>GOOD EVENING</pattern><template>Good evening, how are you tonight?</template></category>   
+<category><pattern>IT IS GOOD TALKING TO YOU</pattern>  <template>Nice chatting with you too.</template> </category>        
+<category><pattern>* BYE</pattern><template>OK see you later.</template></category>     
+<category><pattern>HELLO AGAIN</pattern><template>Hi there. I was just wanting to talk to you.</template></category>     
+<category><pattern>GOOD NIGHT</pattern><template>Goodnight.</template></category>         
 <category><pattern>SHALOM</pattern><template>Does SHALOM mean Hello or Goodbye?</template></category>   
 <category><pattern>WHAT IS SHALOM</pattern><template>Does shalom mean hello or goodbye?</template></category>   
 <category><pattern>YOUR WELCOME</pattern><template>I think you mean "you are welcome".</template></category>   
@@ -38,7 +38,7 @@
 <category><pattern>YOU ARE WELCOME *</pattern><template>It was my pleasure.</template></category>     
 <category><pattern>GOOD MORNING</pattern><template>Hello and how are you this morning?</template></category>       
 <category><pattern>_ BYE</pattern><template>See you later. <sr/></template></category>     
-<category><pattern>GOODNIGHT</pattern><template>Goodnight <get name="name"/></template></category>          
+<category><pattern>GOODNIGHT</pattern><template>Goodnight</template></category>          
 <category><pattern>YOU ARE WELCOME</pattern><template><random><li>The pleasure was all mine.</li><li>Don't mention it.</li><li>Polite people are nice.</li></random></template></category>     
 <category><pattern>GOODBYE</pattern><that>SEE YOU LATER</that><template><srai>bye</srai></template></category>     
 <category><pattern>CIAO MEANS GOODBYE</pattern><template>   <srai>but</srai>    </template></category>     

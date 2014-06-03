@@ -33,11 +33,11 @@ static const arg_t cont_args_def[] = {
 //Parses options for both Rebecca and Pocketsphinx
 Arguments::Arguments(int argc, char* argv[])
 : m_exeName(string(argv[0])),
-m_aimlSchemaPath("../../../../ext/rebecca/resources/schema/AIML.xsd"),
-m_commonTypesSchemaPath("../../../ext/rebecca/resources/schema/common-types.xsd"),
-m_botConfigurationSchemaPath("../../../ext/rebecca/resources/schema/bot-configuration.xsd"),
-m_configurationDirectory("../../../../ext/rebecca/conf"),
-m_aimlDirectory("../../../../ext/rebecca/aiml/annotated_alice"),
+m_aimlSchemaPath("../../../../config/rebecca/resources/schema/AIML.xsd"),
+m_commonTypesSchemaPath("../../../config/rebecca/resources/schema/common-types.xsd"),
+m_botConfigurationSchemaPath("../../../config/rebecca/resources/schema/bot-configuration.xsd"),
+m_configurationDirectory("../../../../config/rebecca/conf"),
+m_aimlDirectory("../../../../config/rebecca/aiml/annotated_aibot"),
 m_currentArgument(NO_ARG)
 {
 	/*
@@ -107,7 +107,7 @@ m_currentArgument(NO_ARG)
 					<< "[-configurationDirectory or -cd] " << endl
 					<< "    Configuration directory (default is ../../conf)" << endl << endl
 					<< "[-aimlDirectory or -ad] " << endl
-					<< "    AIML directory with *.aiml files (default is ../../aiml/annotated_alice)" << endl << endl
+					<< "    AIML directory with *.aiml files (default is ../../aiml/annotated_aibot)" << endl << endl
 					<< endl;
 				exit(0);
 			}
@@ -241,6 +241,8 @@ int main(int argc, char* argv[])
 		{
 			getUtterance(mic);
 			string input = string(mic.hyp);
+			//string input;
+			//getline(cin, input);
 
 			if (input == "/exit" || input == "GOOD NIGHT")
 			{
