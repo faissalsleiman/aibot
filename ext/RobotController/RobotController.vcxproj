@@ -44,9 +44,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>import;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>import;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ForceSensor.h" />
+    <ClInclude Include="import\dynamixel.h" />
     <ClInclude Include="Neck.h" />
     <ClInclude Include="RightArm.h" />
     <ClInclude Include="Servo.h" />
