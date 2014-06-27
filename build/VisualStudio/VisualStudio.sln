@@ -63,6 +63,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aibot_speech", "aibot_speec
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVFaceRecognition", "..\..\ext\OpenCVFaceRecognition\OpenCVFaceRecognition.vcxproj", "{B30A2E31-8397-41B6-9BDC-3A58111F4275}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVHandRecognition", "..\..\ext\OpenCVHandRecognition\OpenCVHandRecognition.vcxproj", "{7802A7A4-4D4C-4401-A880-5B4AC27E969D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RobotController", "..\..\ext\RobotController\RobotController.vcxproj", "{E956A81A-FCA9-4122-A20A-8AF03517F4F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -141,6 +145,14 @@ Global
 		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Debug|Win32.Build.0 = Debug|Win32
 		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Release|Win32.ActiveCfg = Release|Win32
 		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Release|Win32.Build.0 = Release|Win32
+		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Debug|Win32.Build.0 = Debug|Win32
+		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Release|Win32.ActiveCfg = Release|Win32
+		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Release|Win32.Build.0 = Release|Win32
+		{E956A81A-FCA9-4122-A20A-8AF03517F4F7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E956A81A-FCA9-4122-A20A-8AF03517F4F7}.Debug|Win32.Build.0 = Debug|Win32
+		{E956A81A-FCA9-4122-A20A-8AF03517F4F7}.Release|Win32.ActiveCfg = Release|Win32
+		{E956A81A-FCA9-4122-A20A-8AF03517F4F7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
