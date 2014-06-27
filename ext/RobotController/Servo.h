@@ -1,7 +1,7 @@
 #pragma once
 class Servo
 {
-	
+	//hello
 
 public:
 	int dynamixelID;
