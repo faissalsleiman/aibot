@@ -60,11 +60,25 @@ Servo::~Servo()
 
 bool Servo::setPosition(int position, int speed)
 {
-	dxl_write_word(dynamixelID, P_MOVING_SPEED, speed); //set moving speed
+	dxl_write_word(dynamixelID, P_MOVING_SPEED, speed); 
 	dxl_write_word(dynamixelID, P_GOAL_POSITION, position);
 	return true;
 }
 
+bool Servo::setRotationSpeed(int speed, wheelRotationDirection direction)
+{
+	//dynamixel wheels when given a speed 0-1024 will rotate CCW. when give between 1024 -2047 it will rotate counterclockwise
+	if (direction == wheelRotationDirection::CW) 
+	{
+		dxl_write_word(dynamixelID, P_MOVING_SPEED, speed+1024);
+	}
+	else
+	{
+		dxl_write_word(dynamixelID, P_MOVING_SPEED, speed);
+	}
+	
+	return true;
+}
 bool Servo::setAngleLimits(int ClockwiseAngle, int CounterClockwiseAngle)
 {
 	dxl_write_word(dynamixelID, P_CW_ANGEL_LIMIT, ClockwiseAngle);

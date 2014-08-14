@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="RobotMechanics">
+      <UniqueIdentifier>{e5c49064-7291-4821-8d77-92c8f6f35a2c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="STMRecord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortTermMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotNeck.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotLeftArm.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotMotionBase.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotTorso.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="Servo.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceSensor.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotRightArm.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotStructure.cpp">
+      <Filter>RobotMechanics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="STMRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortTermMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotNeck.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotLeftArm.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotMotionBase.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotTorso.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="Servo.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceSensor.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotRightArm.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotStructure.h">
+      <Filter>RobotMechanics</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

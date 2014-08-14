@@ -17,7 +17,7 @@ using namespace cv;
 
 int CAPTUREWIDTH = 640; //in pixels
 int CAPTUREHEIGHT = 480; //in pixels
-double XCAPTUREVIEWINGANGLE = 60;
+double XCAPTUREVIEWINGANGLE = 78;
 double YCAPTUREVIEWINGANGLE = 45;
 
 double getFaceDistance(int faceWidth, int faceHeight)
@@ -35,9 +35,12 @@ double getFaceDistance(int faceWidth, int faceHeight)
 
 int main(int argc, const char** argv)
 {
-	Servo *testServo1 = new Servo(2, 5, 1);
+	Servo *testServo1 = new Servo(1, 5, 1);
 	testServo1->setAngleLimits(202, 822);
-	testServo1->setPosition(512, 128);
+	testServo1->setPosition(512, 128); 
+	Servo *testServo2 = new Servo(2, 5, 1);
+	testServo2->setAngleLimits(202, 822);
+	testServo2->setPosition(512, 128);
 
 	//create the cascade classifier object used for the face detection
 	CascadeClassifier face_cascade;
@@ -62,6 +65,16 @@ int main(int argc, const char** argv)
 	//create a loop to capture and find faces
 	while (true)
 	{
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
 		//capture a new image frame
 		captureDevice >> captureFrame;
 
@@ -92,8 +105,8 @@ int main(int argc, const char** argv)
 			3-atan(Shift from center / planar distance to face) will give us the angle shift
 			NOTE: this result will be in radian
 			4-position to set the servo to must be set using the following formula (assuming 512 is center position)
-			position to set = (angle calculated in step3 / 1.57) x (unsigned additional servo int value at a 90degree angle) + 512
-			the value representa 90degrees converted to radian
+			position to set = (angle calculated in step3 / 1.57) x (unsigned additional servo int value at a 90degree angle)
+			the value represents 90degrees converted to radian
 			*/
 			
 			//CALCULATIONS STEP 1
@@ -117,11 +130,24 @@ int main(int argc, const char** argv)
 			double angleShiftY = atan(centerShiftYinCM / planarFaceDistance);
 
 			//CALCULATIONS STEP 4
-			int XServoPositiontoSet = ((angleShiftX / 1.57) * 310 )+ 512;
-			int YServoPositiontoSet = ((angleShiftY / 1.57) * 310) + 512;
+			int XServoPositiontoSet = ((angleShiftX / 1.57) * 310 );
+			int YServoPositiontoSet = ((angleShiftY / 1.57) * 310) ;
 			
-			//Note servos do not have overload management, so if you have a bracket and try to set an unreachable angel without setting limits, the servo will most definitely go to overload
-			testServo1->setPosition(YServoPositiontoSet, 128); //;1023 will never be achieved, it will only go to the limit.
+			if (-0.05 > angleShiftX && angleShiftX > 0.05)
+			{
+			}
+			else
+			{
+				//Note servos do not have overload management, so if you have a bracket and try to set an unreachable angel without setting limits, the servo will most definitely go to overload
+				testServo1->setPosition(XServoPositiontoSet + testServo1->position, 128); //;1023 will never be achieved, it will only go to the limit.
+			}
+			if (-0.02 < angleShiftY && angleShiftY < 0.02)
+			{
+			}
+			else
+			{
+				testServo2->setPosition(YServoPositiontoSet + testServo2->position, 128); //;1023 will never be achieved, it will only go to the limit.
+			}
 			do
 			{
 				testServo1->setCurrentParameters();
@@ -132,6 +158,17 @@ int main(int argc, const char** argv)
 				cout << "," << testServo1->temperature << ")" << endl;
 				cout << "Comm Status: " << testServo1->checkCommStatus() << endl;
 			} while (testServo1->isMoving());
+			
+			do
+			{
+				testServo2->setCurrentParameters();
+				cout << "Current (Position,Speed,Load,Temperature): (";
+				cout << testServo2->position;
+				cout << "," << testServo2->speed;
+				cout << "," << testServo2->load;
+				cout << "," << testServo2->temperature << ")" << endl;
+				cout << "Comm Status: " << testServo2->checkCommStatus() << endl;
+			} while (testServo2->isMoving());
 
 		}
 
@@ -139,7 +176,7 @@ int main(int argc, const char** argv)
 		imshow("outputCapture", captureFrame);
 
 		//pause for X-ms
-		waitKey(100);
+		waitKey(10);
 	}
 
 	return 0;
