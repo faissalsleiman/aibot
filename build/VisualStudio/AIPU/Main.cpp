@@ -24,6 +24,15 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+//Windows Socket Includes for the server
+
+#define WIN32_LEAN_AND_MEAN
+
+#include <WinSock2.h>
+#include <stdio.h>
+#pragma comment(lib, "Ws2_32.lib")
+
+
 #include "ShortTermMemory.h"
 #include "RobotStructure.h"
 
@@ -50,6 +59,11 @@ int CAPTUREWIDTH = 640; //in pixels
 int CAPTUREHEIGHT = 480; //in pixels
 double XCAPTUREVIEWINGANGLE = 78;
 double YCAPTUREVIEWINGANGLE = 45;
+//
+
+//Global Variables defining socket server parameters
+#define DEFAULT_PORT 27005
+#define DEFAULT_BUFFER_LENGTH    512
 //
 
 #pragma endregion VARIABLES DECLARATION
@@ -186,6 +200,101 @@ void faceRecognizer()
 #pragma endregion FUNCTIONALBLOCK2 SPEECH SYNTHESIZER
 
 
+#pragma region SOCKET SERVER FOR APP COMMUNICATOR
+
+int socketServer()
+{
+	WSADATA wsa;
+	SOCKET serverSocket, clientSocket;
+	struct sockaddr_in server, client;
+	int c;
+	char *message;
+
+	DEBUG_MSG("Initializing App Communicator Socket..." << endl);
+	int iResult = WSAStartup(MAKEWORD(2, 2), &wsa);
+	if (iResult != 0)
+	{
+		DEBUG_MSG("Failed. Error Code : " << WSAGetLastError() << endl);
+		return 1;
+	}
+
+	DEBUG_MSG("App Communicator Socket Initialized" << endl);
+
+	//Create a socket
+	if ((serverSocket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
+	{
+		DEBUG_MSG("Could Not Create App Communicator Socket : " << WSAGetLastError() << endl);
+	}
+
+	DEBUG_MSG("App Communicator Socket Created.\n");
+
+	//Prepare the sockaddr_in structure
+	server.sin_family = AF_INET;
+	server.sin_addr.s_addr = INADDR_ANY;
+	server.sin_port = htons(DEFAULT_PORT);
+
+	//Bind
+	if (::bind(serverSocket, (struct sockaddr *)&server, sizeof(server)) == SOCKET_ERROR)
+	{
+		DEBUG_MSG("Bind failed for App Communicator Socket with error code : " << WSAGetLastError() << endl);
+		exit(EXIT_FAILURE);
+	}
+
+	DEBUG_MSG("Bind App Communicator Socket Done" << endl);
+
+	//Listen to incoming connections
+	listen(serverSocket, 3);
+
+	//Accept and incoming connection
+	DEBUG_MSG("Waiting for incoming connections on App Communicator Socket..." << endl);
+
+	c = sizeof(struct sockaddr_in);
+	clientSocket = accept(serverSocket, (struct sockaddr *)&client, &c);
+
+	if (clientSocket != INVALID_SOCKET)
+	{
+		DEBUG_MSG("Connection accepted on App Communicator Socket" << endl;);
+
+		char recvbuf[DEFAULT_BUFFER_LENGTH];
+		int iSendResult;
+
+		// reveice until the client shutdown the connection
+		do {
+			iResult = recv(clientSocket, recvbuf, DEFAULT_BUFFER_LENGTH, 0);
+			if (iResult > 0)
+			{
+				char msg[DEFAULT_BUFFER_LENGTH];
+				memset(&msg, 0, sizeof(msg));
+				strncpy_s(msg, recvbuf, iResult);
+
+				DEBUG_MSG("Received: " << msg << endl);
+
+				iSendResult = send(clientSocket, recvbuf, iResult, 0);
+
+				if (iSendResult == SOCKET_ERROR)
+				{
+					DEBUG_MSG("send failed: " << WSAGetLastError() << endl);
+					closesocket(clientSocket);
+					WSACleanup();
+					return 1;
+				}
+
+				DEBUG_MSG("Bytes sent: " << iSendResult << endl);
+			}
+			else if (iResult == 0)
+				DEBUG_MSG("Connection closed\n");
+			else
+			{
+				DEBUG_MSG("recv failed: " << WSAGetLastError() << endl);
+				closesocket(serverSocket);
+				WSACleanup();
+				return 1;
+			}
+		} while (iResult > 0);
+	}
+	return 1;
+}
+#pragma endregion SOCKET SERVER FOR APP COMMUNICATOR
 
 
 void STMServerThread()
@@ -271,7 +380,10 @@ int main() {
 	
 	//Start the Face Recognition functional block
 	std::thread t1(faceRecognizer);
-   
+	std::thread t2(socketServer);
+
+
+	//std::this_thread::sleep_for(std::chrono::milliseconds(10000000));
     //Start the Speech Synthesizer
 
     
