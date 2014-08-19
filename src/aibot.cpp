@@ -239,10 +239,10 @@ int main(int argc, char* argv[])
 		*/
 		while (true)
 		{
-			getUtterance(mic);
-			string input = string(mic.hyp);
-			//string input;
-			//getline(cin, input);
+			//getUtterance(mic);
+			//string input = string(mic.hyp);
+			string input;
+			getline(cin, input);
 
 			if (input == "/exit" || input == "GOOD NIGHT")
 			{

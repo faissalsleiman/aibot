@@ -16,6 +16,7 @@ ShortTermMemory::~ShortTermMemory()
 
 bool ShortTermMemory::inputRecord(STMRecord* inputRecord)
 {
+	
 	delete STM[SHORT_TERM_MEMORY_SIZE - 1]; // delete last entry in the stack
 	STM[SHORT_TERM_MEMORY_SIZE - 1] = NULL; // delete last entry in the stack
 
@@ -23,6 +24,11 @@ bool ShortTermMemory::inputRecord(STMRecord* inputRecord)
 	for (int i = SHORT_TERM_MEMORY_SIZE - 1 ; i > 0; i--)
 	{
 		STM[i] = STM[i-1];
+	}
+
+	if (STM[0] != NULL)
+	{
+		STM[0] = NULL; // delete first entry in the stack
 	}
 
 	STM[0] = inputRecord;
@@ -75,3 +81,5 @@ bool ShortTermMemory::markRecordAsProcessed(int index)
 		return true;
 	}
 }
+
+

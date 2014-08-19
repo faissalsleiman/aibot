@@ -4,7 +4,10 @@
  
 #include <iostream>
 #include <stdio.h>
- 
+
+#include <ctime>
+#include <chrono>
+
 using namespace std;
 using namespace cv;
 
@@ -24,6 +27,8 @@ double getFaceDistance(int faceWidth, int faceHeight)
 
 int main(int argc, const char** argv)
 {
+	
+
     //create the cascade classifier object used for the face detection
     CascadeClassifier face_cascade;
     //use the haarcascade_frontalface_alt.xml library
@@ -47,9 +52,12 @@ int main(int argc, const char** argv)
     //create a loop to capture and find faces
     while(true)
     {
+		//Start Timer
+		auto start = std::chrono::high_resolution_clock::now();
+
         //capture a new image frame
         captureDevice>>captureFrame;
- 
+
         //convert captured image to gray scale and equalize
         cvtColor(captureFrame, grayscaleFrame, CV_BGR2GRAY);
         equalizeHist(grayscaleFrame, grayscaleFrame);
@@ -78,6 +86,11 @@ int main(int argc, const char** argv)
         //print the output
         imshow("outputCapture", captureFrame);
  
+		//measure duration to run face detection and computing and print it
+		auto elapsed = std::chrono::high_resolution_clock::now() - start;
+		long long microseconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+		cout << "TIME: " << microseconds;
+
         //pause for X-ms
         waitKey(100);
     }

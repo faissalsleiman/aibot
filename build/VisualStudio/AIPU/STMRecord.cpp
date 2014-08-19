@@ -1,6 +1,8 @@
 #include "STMRecord.h"
 
 
+
+
 SpeechRecord::SpeechRecord(string inputTranscription, int inputAccuracy, int inputLoudness)
 {
 	timeStamp = steady_clock::now(); 
@@ -45,3 +47,5 @@ SoundDetectionRecord::~SoundDetectionRecord()
 {
 
 }
+
+

@@ -7,7 +7,8 @@ using namespace std;
 using namespace std::chrono;
 
 enum STMRecordType {
-	SPEECH_INPUT = 0,
+	AIPU_STATE = 0 ,
+    SPEECH_INPUT ,
 	FACE_DETECTION,
 	SOUND_DETECTION,
 	SKELETAL_DETECTION,
@@ -21,6 +22,23 @@ enum STMRecordType {
 	FACE_RECOGNITION
 };
 
+const string STMRecordTypeStrings[] = {
+	"AIPU_STATE",
+	"SPEECH_INPUT",
+	"FACE_DETECTION",
+	"SOUND_DETECTION",
+	"SKELETAL_DETECTION",
+	"THERMAL_DETECTION",
+	"HAND_GESTURE",
+	"APP_COMMANDER",
+	"SLAM",
+	"OBJECTIVE",
+	"OBSTACLE_DETECTION",
+	"OBJECT_RECOGNITION",
+	"FACE_RECOGNITION"
+};
+
+
 
 class STMRecord {
 public:
@@ -32,6 +50,10 @@ public:
 	{
 		return recordType;
 	}
+	string getRecordTypeString()
+	{
+		return STMRecordTypeStrings[recordType];
+	}
 	steady_clock::time_point getTimeStamp()
 	{
 		return timeStamp;
@@ -41,7 +63,12 @@ public:
 		steady_clock::time_point currentTime = steady_clock::now(); //currrent time of running this function
 		return duration_cast<milliseconds>(currentTime - timeStamp).count();
 	}
+	void markAsProcessed()
+	{
+		processed = true;
+	}
 };
+
 
 
 class SpeechRecord : public STMRecord {

@@ -1,4 +1,14 @@
-// pointers to base class
+//TODO:
+//Create threads and message passing
+//Create a face recognition thread that talks to STM Thread
+//Write the code in main to read the face detected and track it using the robot structure's neck
+//
+//
+//Create a class called SpeechSynthesizer that intiailzes itself in main
+//Speech Synthesizer must have a function Speak(text, volume, speed)
+//
+//
+
 #include <iostream>
 #include <iomanip>
 #include <ctime>
@@ -7,13 +17,19 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <math.h>
+
+//OpenCV includes, this is for face recognition to work
+#include <opencv2/objdetect/objdetect.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 #include "ShortTermMemory.h"
 #include "RobotStructure.h"
 
-
 using namespace std;
 using namespace std::chrono;
+using namespace cv;
 
 //Comment out "#define DEBUGGING_ENABLED" to disable debugging
 #define DEBUGGING_ENABLED
@@ -24,7 +40,22 @@ using namespace std::chrono;
 #endif
 
 
-#pragma region FUNCTIONS DECLARATION
+#pragma region VARIABLES DECLARATION
+
+ShortTermMemory *AIPU_STM;
+RobotStructure * robot;
+
+//Global Variables for Face Recognition Functional Block
+int CAPTUREWIDTH = 640; //in pixels
+int CAPTUREHEIGHT = 480; //in pixels
+double XCAPTUREVIEWINGANGLE = 78;
+double YCAPTUREVIEWINGANGLE = 45;
+//
+
+#pragma endregion VARIABLES DECLARATION
+
+
+#pragma region STM FUNCTIONS DECLARATION
 
 void printSTMRecordType(STMRecord * inputRecord) //This is a test function that simply prints the type of Record
 {
@@ -33,48 +64,9 @@ void printSTMRecordType(STMRecord * inputRecord) //This is a test function that 
 		DEBUG_MSG("**POINTER TO NULL**" << endl);
 		return;
 	}
-	switch (inputRecord->getRecordType())
+	else
 	{
-	case STMRecordType::SPEECH_INPUT:
-		DEBUG_MSG("SPEECH_INPUT" << endl);
-		break;
-	case STMRecordType::FACE_DETECTION:
-		DEBUG_MSG("FACE_DETECTION" << endl);
-		break;
-	case STMRecordType::SOUND_DETECTION:
-		DEBUG_MSG("SOUND_DETECTION" << endl);
-		break;
-	case STMRecordType::SKELETAL_DETECTION:
-		DEBUG_MSG("SKELETAL_DETECTION" << endl);
-		break;
-	case STMRecordType::THERMAL_DETECTION:
-		DEBUG_MSG("THERMAL_DETECTION" << endl);
-		break;
-	case STMRecordType::HAND_GESTURE:
-		DEBUG_MSG("HAND_GESTURE" << endl);
-		break;
-	case STMRecordType::APP_COMMANDER:
-		DEBUG_MSG("APP_COMMANDER" << endl);
-		break;
-	case STMRecordType::SLAM:
-		DEBUG_MSG("SLAM" << endl);
-		break;
-	case STMRecordType::OBJECTIVE:
-		DEBUG_MSG("OBJECTIVE" << endl);
-		break;
-	case STMRecordType::OBSTACLE_DETECTION:
-		DEBUG_MSG("OBSTACLE_DETECTION" << endl);
-		break;
-	case STMRecordType::OBJECT_RECOGNITION:
-		DEBUG_MSG("OBJECT_RECOGNITION" << endl);
-		break;
-	case STMRecordType::FACE_RECOGNITION:
-		DEBUG_MSG("FACE_RECOGNITION" << endl);
-		break;
-	default:
-		DEBUG_MSG("UNRECOGNIZED STM RECORD TYPE" << endl);
-		break;
-
+		DEBUG_MSG(inputRecord->getRecordTypeString() << endl);
 	}
 }
 
@@ -90,27 +82,108 @@ vector<string> getSubStrings(string input , char delimiter) //Returns a vector o
 	return returnedVectorofStrings;
 }
 
+#pragma endregion STM FUNTIONS DECLARATION
+
+#pragma region FUNCTIONALBLOCK1 FACE RECOGNITION
+double getFaceDistance(int faceWidth, int faceHeight)
+{
+	return ((double)CAPTUREWIDTH / faceWidth) * (double)18;
+
+	//NOTE: if a new camera is used, the formula must be re-calibrated
+	//FORMULA: f = d*Z / D
+	//d = faceWidth in Pixels
+	//Z = Distance to Face
+	//D = Actual Face Width
+	//f = Capture Width in Pixels
+}
+
+void faceRecognizer()
+{
+	//create the cascade classifier object used for the face detection
+	CascadeClassifier face_cascade;
+	//use the haarcascade_frontalface_alt.xml library
+	face_cascade.load("..\\..\\..\\config\\Opencv\\haarcascade_frontalface_alt.xml");
+
+	//setup video capture device and link it to the first capture device
+	VideoCapture captureDevice;
+
+	captureDevice.open(0);
+	//Set Dimensions
+	captureDevice.set(CV_CAP_PROP_FRAME_HEIGHT, CAPTUREHEIGHT);
+	captureDevice.set(CV_CAP_PROP_FRAME_WIDTH, CAPTUREWIDTH);
+
+	//setup image files used in the capture process
+	Mat captureFrame;
+	Mat grayscaleFrame;
+
+	//create a window to present the results
+	namedWindow("outputCapture", 1);
+
+	//create a loop to capture and find faces
+	while (true)
+	{
+		//Why capture multiple frames, testing revealed that if this is not done, we do not get the current capture from the cam
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+		//capture a new image frame
+		captureDevice >> captureFrame;
+
+		//convert captured image to gray scale and equalize
+		cvtColor(captureFrame, grayscaleFrame, CV_BGR2GRAY);
+		equalizeHist(grayscaleFrame, grayscaleFrame);
+
+		//create a vector array to store the face found
+		std::vector<Rect> faces;
+
+		//find faces and store them in the vector array
+		face_cascade.detectMultiScale(grayscaleFrame, faces, 1.1, 3, CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_SCALE_IMAGE, Size(35, 35));
 
 
-#pragma endregion FUNTIONS DECLARATION
+		//draw a rectangle for all found faces in the vector array on the original image
+		for (int i = 0; i < faces.size(); i++)
+		{
+			Point pt1(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
+			Point pt2(faces[i].x, faces[i].y);
 
-#pragma region VARIABLES DECLARATION
+			rectangle(captureFrame, pt1, pt2, cvScalar(0, 255, 0, 0), 1, 8, 0);
 
-enum AIPUSTATE { //State of the AIPU is kept in this variable
-	IDLE = 0,
-	SOUND_DETECTED,
-	LOCATING_SPEAKER,
-	AWAITING_KICKOFF_PHRASE,
-	ENGAGED_IN_COVERSATION,
-	CHARGING_BATTERY,
-	PROCESSING_DATA
-};
-AIPUSTATE currentAIPUState;
-ShortTermMemory *AIPU_STM;
-RobotStructure * robot;
+			//CALCULATIONS STEP 1
+			//DEBUG_MSG("FACE DETECTED: " << faces.size() << endl);
+			//DEBUG_MSG("Face Size in Pixels: " << faces[i].width << "x" << faces[i].height << endl);
+			//DEBUG_MSG("Center of FACE Coordinates: " << faces[i].x + (faces[i].width / 2) << "," << faces[i].y + (faces[i].height / 2) << endl);
+			double centerShiftX = -(faces[i].x + (faces[i].width / 2) - (CAPTUREWIDTH / 2));
+			double centerShiftY = -(faces[i].y + (faces[i].height / 2) - (CAPTUREHEIGHT / 2));
+			//DEBUG_MSG("Shift from Center of Camera: " << centerShiftX << "," << centerShiftY << endl); //assuming 640x480 res. so center of the image is at 320,240. 
+			double planarFaceDistance = getFaceDistance(faces[i].width, faces[i].height);
+			DEBUG_MSG("Approx. Distance in cm: " << planarFaceDistance << endl);
 
-#pragma endregion VARIABLES DECLARATION
+			FaceDetectionRecord *recognizedFace = new FaceDetectionRecord(faces[i].width, faces[i].height, faces[i].x + (faces[i].width / 2), faces[i].y + (faces[i].height / 2));
+			AIPU_STM->inputRecord(static_cast<STMRecord*>(recognizedFace));
 
+		}
+
+		//print the output
+		imshow("outputCapture", captureFrame);
+
+		//pause for X-ms
+		waitKey(10);
+	}
+}
+#pragma endregion FUNCTIONALBLOCK1 FACE RECOGNITION
+
+#pragma region FUNCTIONALBLOCK2 SPEECH SYNTHESIZER
+
+
+
+#pragma endregion FUNCTIONALBLOCK2 SPEECH SYNTHESIZER
 
 
 
@@ -135,8 +208,8 @@ void STMServerThread()
 			string transcriptionText = serverInputSubStrings[0]; 
 			int transcriptionAccuracy = atoi(serverInputSubStrings[1].c_str());
 			int transcriptionLoudness = atoi(serverInputSubStrings[2].c_str());
-			SpeechRecord *incomingSpeech = new SpeechRecord(transcriptionText, transcriptionAccuracy, transcriptionLoudness); // get input and create 
-			AIPU_STM->inputRecord(static_cast<STMRecord*>(incomingSpeech));
+			//SpeechRecord *incomingSpeech = new SpeechRecord(transcriptionText, transcriptionAccuracy, transcriptionLoudness); // get input and create 
+			//AIPU_STM->inputRecord(static_cast<STMRecord*>(incomingSpeech));
 			
 			break;
 		}
@@ -185,156 +258,117 @@ void STMServerThread()
 
 
 int main() {
+
 	//Initialize Functional Blocks, Represented in Code as Threads
 
 	AIPU_STM = new ShortTermMemory(); // Initialize Short Term Memory Structure
 
-	currentAIPUState = AIPUSTATE::IDLE; //Initialize the state of the AIPU to IDLE
-
+	//Initialize the state of the AIPU to IDLE
+	AIPU_STM->setCurrentAIPUState(AIPUSTATE::IDLE);
+    
+    //Create robot structure of servos for control
 	robot = new RobotStructure();
 	
+	//Start the Face Recognition functional block
+	std::thread t1(faceRecognizer);
+   
+    //Start the Speech Synthesizer
 
-	//Read Data from STM (Short-Term-Memory) based on State
+    
+    //Start State Machine
+    //Read Data from STM (Short-Term-Memory) based on State
 	//Process STM Data
 	//Take Action
-
-	switch (currentAIPUState)
+    
+   
+	while (true)
 	{
-		case AIPUSTATE::IDLE:
+		//std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		switch (AIPU_STM->getCurrentAIPUState())
+		{
+			case AIPUSTATE::IDLE:
 			{
+				//DEBUG_MSG("IDLE STATE" << endl);
 				/*
 				if a face is detected move to engaged in convo within 1-2 sec
-				if kcikoff phrase received in good accuracy then go to engaged in convo
+				if kickoff phrase received in good accuracy then go to engaged in convo
 				*/
+				FaceDetectionRecord *detectedFaceRecord = NULL;
+
+				STMRecord *tempReadRecord;
+				for (int i = 0; i < AIPU_STM->getSTMSize(); i++)
+				{
+					tempReadRecord = AIPU_STM->getSTMRecord(i);
+					if (tempReadRecord == NULL)
+						continue;
+					if (tempReadRecord->recordType == STMRecordType::FACE_DETECTION && !tempReadRecord->processed) //code must block here otherwise a combo serial number for record must be created this will conmbine type with record number
+					{
+						detectedFaceRecord = static_cast<FaceDetectionRecord*>(tempReadRecord);
+						break; //this record would be the current state, the reason is that our STM is a stack, Last in First Out
+					}
+				}
+				if (detectedFaceRecord == NULL)
+					break;
+
+				//cout << '\a'; 
+				detectedFaceRecord->markAsProcessed();
+				DEBUG_MSG("READING RECORD: " << detectedFaceRecord->faceXCoordinate << "," << detectedFaceRecord->faceYCoordinate << endl);
+
 				break;
 			}
-		case AIPUSTATE::SOUND_DETECTED:
+			case AIPUSTATE::SOUND_DETECTED:
 			{
 				break;
 			}
-		case AIPUSTATE::LOCATING_SPEAKER:
+			case AIPUSTATE::LOCATING_SPEAKER:
 			{
 				/*
-				
 				if a face is detected move to engaged in convo
-
 				*/
 				break;
 			}
-		case AIPUSTATE::AWAITING_KICKOFF_PHRASE:
+			case AIPUSTATE::AWAITING_KICKOFF_PHRASE:
 			{
 				/*
 				if a face is detected move to engaged in convo within 1-2 sec
 				if a hand gesture is detected within 1-2 sec then move to in convo
-				if kcikoff phrase received in good accuracy then go to engaged in convo
+				if kickoff phrase received in good accuracy then go to engaged in convo
 				*/
 				break;
 			}
-		case AIPUSTATE::ENGAGED_IN_COVERSATION:
+			case AIPUSTATE::ENGAGED_IN_COVERSATION:
 			{
 				/*
 				no speech input in 5 seconds then go back to idle
 				if no eye contact in the last 5 seconds then go back to idle
 				if sound is detected from another source then ignore it
 				keep track of face and maintain eye contact with it
-
 				*/
 				break;
 			}
-		case AIPUSTATE::CHARGING_BATTERY:
+			case AIPUSTATE::CHARGING_BATTERY:
 			{
 				break;
 			}
-		case AIPUSTATE::PROCESSING_DATA:
-			{
-				 break;
-			}
-		default:
+			case AIPUSTATE::PROCESSING_DATA:
 			{
 				break;
+			}
+			default:
+			{
+					break;
 			}
 
+		}
+		
 	}
-	
 
 	//Clean STM
-	
-	
-	
-	//THE BELOW CODE IS ALL FOR TESTING WHILE CODING (TO BE DELETED LATER)
-	
-	DEBUG_MSG("*******************" << endl);
-
-	//TEST CREATION AND RETREIVAL OF TIMESTAMP
-	SpeechRecord *temp = new SpeechRecord("hello", 0, 0);
-	std::this_thread::sleep_for(std::chrono::milliseconds(22));
-	DEBUG_MSG("time: " << temp->getTimeRelativeToNowInMilliSeconds() << endl);
-
-	DEBUG_MSG("*******************" << endl);
-
-	
-	//Short Term Memory Handling Tests
-
-	ShortTermMemory *AIPU_STM = new ShortTermMemory();
-
-	DEBUG_MSG("TEST 1 - Creating STM Records " << endl);
-	for (int i = 0; i < AIPU_STM->getSTMSize(); i++)
-	{
-		SpeechRecord *incomingSpeech = new SpeechRecord("hello", i, i);
-		AIPU_STM->inputRecord(static_cast<STMRecord*>(incomingSpeech));
-	}
-
-	for (int i = 0; i < AIPU_STM->getSTMSize(); i++) //overwrite them all
-	{
-		SpeechRecord *incomingSpeech = new SpeechRecord("hi there!!", i, i);
-		AIPU_STM->inputRecord(static_cast<STMRecord*>(incomingSpeech));
-	}
-
-	DEBUG_MSG("TEST 2 -Printing " << endl);
-	for (int i = 0; i < AIPU_STM->getSTMSize(); i++)
-	{
-		DEBUG_MSG(i << " : ");
-		printSTMRecordType(AIPU_STM->getSTMRecord(i));
-	}
-	
-
-
-	DEBUG_MSG("*******************" << endl);
-	//STM TESTING TRIALS casting pointers
-	SpeechRecord *speech1 = new SpeechRecord("hello", 0, 0);
-	SpeechRecord * speech2  = NULL;
-
-	STMRecord * record1 = speech1;
-	
-	switch (record1->getRecordType())
-	{
-		case STMRecordType::SPEECH_INPUT:
-			DEBUG_MSG("SPEECH INPUT" << endl);
-			speech2 = static_cast<SpeechRecord*>(record1);
-			break;
-		default:
-			DEBUG_MSG("DEFAULT" << endl);
-			break;
-			
-	}
-	
-	switch (speech2->getRecordType())
-	{
-	case STMRecordType::SPEECH_INPUT:
-		DEBUG_MSG("SPEECH INPUT" << endl);
-		speech2 = static_cast<SpeechRecord*>(record1);
-		break;
-	default:
-		DEBUG_MSG("DEFAULT" << endl);
-		break;
-
-	}
-
 	
 	DEBUG_MSG("Press any Key to Exit" << endl);
 	int x;
 	std::cin >> x;
-
+	
 	return 0;
 }
 
