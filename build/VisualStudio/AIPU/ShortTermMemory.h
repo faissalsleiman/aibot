@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const int SHORT_TERM_MEMORY_SIZE = 10;
+const int SHORT_TERM_MEMORY_SIZE = 1024;
 
 
 enum AIPUSTATE {
