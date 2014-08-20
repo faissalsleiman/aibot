@@ -1,6 +1,17 @@
 #include "STMRecord.h"
 
 
+AppCommanderRecord::AppCommanderRecord(string inputCommandFromClient)
+{
+	timeStamp = steady_clock::now();
+	recordType = STMRecordType::APP_COMMANDER;
+	processed = false;
+	inputCommand = inputCommandFromClient;
+}
+AppCommanderRecord::~AppCommanderRecord()
+{
+
+}
 
 
 SpeechRecord::SpeechRecord(string inputTranscription, int inputAccuracy, int inputLoudness)

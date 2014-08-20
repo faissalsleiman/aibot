@@ -83,5 +83,8 @@
     <ClInclude Include="RobotStructure.h">
       <Filter>RobotMechanics</Filter>
     </ClInclude>
+    <ClInclude Include="TTSTcpClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

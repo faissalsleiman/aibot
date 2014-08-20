@@ -90,6 +90,7 @@
     <ClInclude Include="ShortTermMemory.h" />
     <ClInclude Include="STMRecord.h" />
     <ClInclude Include="RobotTorso.h" />
+    <ClInclude Include="TTSTcpClient.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

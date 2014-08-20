@@ -70,6 +70,15 @@ public:
 };
 
 
+class AppCommanderRecord : public STMRecord {
+
+public:
+	string inputCommand;
+
+	AppCommanderRecord(string inputCommandFromClient);
+	~AppCommanderRecord();
+
+};
 
 class SpeechRecord : public STMRecord {
 
@@ -91,7 +100,7 @@ public:
 	int faceWidth;
 	int faceHeight;
 	int faceXCoordinate;
-	int faceYCoordinate;
+	int faceYCoordinate; 
 
 	FaceDetectionRecord(int inputFaceWidth, int inputFaceHeight, int inputFaceXCoordinate, int inputFaceYCoordinate);
 	~FaceDetectionRecord();
