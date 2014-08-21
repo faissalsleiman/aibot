@@ -28,7 +28,7 @@ public:
 	* \param args The array of arguments
 	*/
 	Arguments(int argc, char* args[]);
-	
+
 	/**
 	* Returns binary's name
 	*/

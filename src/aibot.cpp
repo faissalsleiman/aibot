@@ -209,7 +209,7 @@ int main(int argc, char* argv[])
 	GraphBuilder &builder = aiml.getGraphBuilder();
 	myCallBacks callback;
 	builder.setCallBacks(&callback);
-	
+
 	rebecca_init(arguments, builder);
 
 	//Main code

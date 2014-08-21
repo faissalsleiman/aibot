@@ -44,12 +44,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DYNAMIXEL);$(OPENCV_DIR)\..\..\include\;$(BOOST_INCLUDE)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DYNAMIXEL);$(OPENCV_DIR)\..\..\include\;$(BOOST_INCLUDE);..\..\..\ext\sphinxbase\include;..\..\..\ext\pocketsphinx\include;..\..\..\ext\rebecca\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AIBOT_ENTRY_POINTS;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DYNAMIXEL);$(OPENCV_DIR)\bin;$(OPENCV_DIR)\lib;$(BOOST_LIBD)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core249d.lib;opencv_imgproc249d.lib;opencv_highgui249d.lib;opencv_ml249d.lib;opencv_video249d.lib;opencv_features2d249d.lib;opencv_calib3d249d.lib;opencv_objdetect249d.lib;opencv_contrib249d.lib;opencv_legacy249d.lib;opencv_flann249d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DYNAMIXEL);$(OPENCV_DIR)\bin;$(OPENCV_DIR)\lib;$(BOOST_LIBD);$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_core249d.lib;opencv_imgproc249d.lib;opencv_highgui249d.lib;opencv_ml249d.lib;opencv_video249d.lib;opencv_features2d249d.lib;opencv_calib3d249d.lib;opencv_objdetect249d.lib;opencv_contrib249d.lib;opencv_legacy249d.lib;opencv_flann249d.lib;rebecca.lib;pocketsphinx.lib;sphinxbase.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,7 +68,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="continuous.cpp" />
     <ClCompile Include="ForceSensor.cpp" />
+    <ClCompile Include="rebecca.cpp" />
     <ClCompile Include="RobotLeftArm.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RobotMotionBase.cpp" />
@@ -80,7 +83,10 @@
     <ClCompile Include="RobotTorso.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIPUArguments.h" />
+    <ClInclude Include="continuous.h" />
     <ClInclude Include="ForceSensor.h" />
+    <ClInclude Include="rebecca.h" />
     <ClInclude Include="RobotLeftArm.h" />
     <ClInclude Include="RobotMotionBase.h" />
     <ClInclude Include="RobotNeck.h" />

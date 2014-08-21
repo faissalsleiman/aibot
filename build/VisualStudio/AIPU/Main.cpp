@@ -34,6 +34,15 @@
 //Microsoft Speech API (for Text-To-Speech (TTS) Engine)
 #include <sapi.h>
 
+//Rebecca AIML Parser
+#include "rebecca.h"
+
+//CMU PocketSphinx
+#include "continuous.h"
+
+//Arguement classes used to handle RebeccaAIML and Pocketsphinx
+#include "AIPUArguments.h"
+
 //AIPU Structures
 #include "ShortTermMemory.h"
 #include "RobotStructure.h"
@@ -74,6 +83,11 @@ const double YCAPTUREVIEWINGANGLE = 45;
 #define DEFAULT_TTS_ENGINE_PORT 27006
 #define DEFAULT_TTS_ENGINE_BUFFER_LENGTH    512
 
+//Global Variable for RebeccaAIML
+AimlFacade aiml;
+GraphBuilder &builder = aiml.getGraphBuilder();
+
+
 #pragma endregion VARIABLES DECLARATION
 
 #pragma region STM FUNCTIONS DECLARATION
@@ -105,7 +119,7 @@ vector<string> getSubStrings(string input , char delimiter) //Returns a vector o
 
 #pragma endregion STM FUNTIONS DECLARATION
 
-#pragma region FUNCTIONALBLOCK1 FACE RECOGNITION
+#pragma region FACE RECOGNITION Engine
 double getFaceDistance(int faceWidth, int faceHeight)
 {
 	return ((double)CAPTUREWIDTH / faceWidth) * (double)18;
@@ -188,12 +202,7 @@ void faceRecognizer()
 		waitKey(10);
 	}
 }
-#pragma endregion FUNCTIONALBLOCK1 FACE RECOGNITION
-
-#pragma region FUNCTIONALBLOCK2 REBECCA AIML Parser
-
-#pragma endregion FUNCTIONALBLOCK2 REBECCA AIML Parser
-
+#pragma endregion FACE RECOGNITION Engine
 
 #pragma region SOCKET SERVER FOR APP COMMUNICATOR
 int socketServer()
@@ -296,76 +305,6 @@ int socketServer()
 	return 1;
 }
 #pragma endregion SOCKET SERVER FOR APP COMMUNICATOR
-
-
-void STMServerThread()
-{
-	//Wait for incoming connections from Functional Blocks
-	STMRecordType incomingConnection = STMRecordType::SPEECH_INPUT; //these are temp until actual code is written
-	string inputFromFunctionalBlock;  //these are temp until actual code is written
-
-	switch (incomingConnection)
-	{
-		case STMRecordType::SPEECH_INPUT:
-		{
-			DEBUG_MSG("SPEECH_INPUT" << endl);
-			vector<string> serverInputSubStrings = getSubStrings(inputFromFunctionalBlock, ','); //convert comma separated input into usable substrings
-			if (serverInputSubStrings.size() != 3)
-			{
-				DEBUG_MSG("SYNTAX RECEIVED FROM FUNCTIONAL BLOCK IS INCORRECT!" << endl);
-				break;
-			}
-			string transcriptionText = serverInputSubStrings[0]; 
-			int transcriptionAccuracy = atoi(serverInputSubStrings[1].c_str());
-			int transcriptionLoudness = atoi(serverInputSubStrings[2].c_str());
-			//SpeechRecord *incomingSpeech = new SpeechRecord(transcriptionText, transcriptionAccuracy, transcriptionLoudness); // get input and create 
-			//AIPU_STM->inputRecord(static_cast<STMRecord*>(incomingSpeech));
-			
-			break;
-		}
-		case STMRecordType::FACE_DETECTION:
-			DEBUG_MSG("FACE_DETECTION" << endl);
-			break;
-		case STMRecordType::SOUND_DETECTION:
-			DEBUG_MSG("SOUND_DETECTION" << endl);
-			break;
-		case STMRecordType::SKELETAL_DETECTION:
-			DEBUG_MSG("SKELETAL_DETECTION" << endl);
-			break;
-		case STMRecordType::THERMAL_DETECTION:
-			DEBUG_MSG("THERMAL_DETECTION" << endl);
-			break;
-		case STMRecordType::HAND_GESTURE:
-			DEBUG_MSG("HAND_GESTURE" << endl);
-			break;
-		case STMRecordType::APP_COMMANDER:
-			DEBUG_MSG("APP_COMMANDER" << endl);
-			break;
-		case STMRecordType::SLAM:
-			DEBUG_MSG("SLAM" << endl);
-			break;
-		case STMRecordType::OBJECTIVE:
-			DEBUG_MSG("OBJECTIVE" << endl);
-			break;
-		case STMRecordType::OBSTACLE_DETECTION:
-			DEBUG_MSG("OBSTACLE_DETECTION" << endl);
-			break;
-		case STMRecordType::OBJECT_RECOGNITION:
-			DEBUG_MSG("OBJECT_RECOGNITION" << endl);
-			break;
-		case STMRecordType::FACE_RECOGNITION:
-			DEBUG_MSG("FACE_RECOGNITION" << endl);
-			break;
-		default:
-			DEBUG_MSG("UNRECOGNIZED STM RECORD TYPE" << endl);
-			break;
-	}
-	
-
-	//Process Data and Put into STM
-
-}
-
 
 #pragma region Text-To-Speech Engine
 
@@ -488,13 +427,107 @@ int TTSEngineServer()
 
 #pragma endregion Text-To-Speech Engine
 
+#pragma region RebeccaAIML Engine
 
+void setupRebeccaAIMLEngine(int argc, char* argv[])
+{
+	RebeccaArguments arguments(argc, argv);
+
+	//Initialize Rebecca
+	myCallBacks callback;
+	builder.setCallBacks(&callback);
+
+	rebecca_init(arguments, builder);
+
+	//Main code
+	/*
+	* Send a initial conversation of "connect" to
+	* annotated alice and get the response.
+	*/
+	StringPimpl response = builder.getResponse("connect");
+
+	/*
+	* Get the botName which should be Rebecca since that is
+	* the name give in the configuration file properties.xml
+	* which we parsed above.
+	*/
+	string botName = builder.getBotPredicate("name").c_str();
+
+	//Send the initial opening line of the bot
+	cout << botName << " says: " << response.c_str() << endl;
+
+}
+
+string getRebeccaAIMLresponse(string input)
+{
+	//Here we get some internal Rebecca information.
+	cout << endl
+		<< "Internal information:" << endl
+		<< "=====================" << endl
+		<< input << " : "
+		<< builder.getThat().c_str() << " : "
+		<< builder.getTopic().c_str() << endl;
+
+	/*
+	* Ahhh finally.  We give the user input to Rebecca Aiml's loaded
+	* AIML and get the response back.
+	*/
+	StringPimpl response = builder.getResponse(input.c_str());
+
+	cout << "=====================" << endl << endl;
+
+	return response.c_str();
+}
+
+
+#pragma endregion RebeccaAIML Engine
+
+#pragma region PocketSphinx Engine
+
+void runPocketSphinxEngine(int argc, char* argv[])
+{
+	//Initialize Pocketsphinx
+	PocketSphinxArguments arguments(argc, argv);
+
+	//Global Variable for PocketSphinx
+	mic_data_t mic;
+
+	continuous_init(arguments, mic);
+
+	cout << "POCKETSPHINX ENGINE READY..."  << endl;
+
+	while (true)
+	{
+		getUtterance(mic);
+		string input = string(mic.hyp);
+
+		cout << "You Said:" << input << endl;
+
+		/*
+		TcpClient client("127.0.0.1");
+
+		if (!client.Start(DEFAULT_TTS_ENGINE_PORT))
+		{
+			DEBUG_MSG("Error Communicating with TTS Engine");
+			break;
+		}
+
+		client.Send((char*)textToSpeak.c_str());
+
+		client.Stop();
+		*/
+	}
+
+}
+
+
+#pragma endregion PocketSphinx Engine
 
 
 int main() {
+	
 
 	//Initialize Functional Blocks, Represented in Code as Threads
-
 	AIPU_STM = new ShortTermMemory(); // Initialize Short Term Memory Structure
 
 	//Initialize the state of the AIPU to IDLE
@@ -503,10 +536,18 @@ int main() {
     //Create robot structure of servos for control
 	robot = new RobotStructure();
 	
+	//Start RebeccaAIML Engine
+	char* RAEarg[] = { "AIPU.exe", NULL };
+	setupRebeccaAIMLEngine(1, RAEarg); // this is a synchronous function
+
 	//Start the Face Recognition functional blocks
 	std::thread t1(faceRecognizer); //Face Recognition Engine
 	std::thread t2(socketServer); //APP Communicator
 	std::thread t3(TTSEngineServer); //Text-To-Speech Engine
+	char* argv[] = { "AIPU.exe", "-hmm", "hub4wsj_sc_8k", "-dict", "aibot.dic", "-lm", "aibot.lm", NULL };
+	std::thread t4(runPocketSphinxEngine,7, argv); //Speech to Text Engine (PocketSphinx) 
+	//note to faisoola, pocketsphinx is not yet integrated in the AIPU, im just running it to cout what you say
+
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(10000000));
     
@@ -517,6 +558,8 @@ int main() {
 	//
 	//Important Rule for STM, in any state besides IDLE, once a positive record is hit, you will most likely need to
 	//re-set the AIPU state, otherwise it could timeout (depending on the code)
+
+	//FAISOOLA, the below code is just for testing, nothing written below this line is meant to do anything correct, it is just for illustration purposes
    
 	while (true)
 	{
@@ -708,99 +751,77 @@ int main() {
 
 	//Clean STM
 	
-	DEBUG_MSG("Press any Key to Exit" << endl);
-	int x;
-	std::cin >> x;
 	
 	return 0;
 }
 
 
-
-
-
-
-
-
-
-
-
-
 /*
-robot->RightArm->Shoulder->enabletorque(false);
-robot->RightArm->armTwist->enabletorque(false);
-robot->RightArm->Elbow->enabletorque(false);
-robot->RightArm->Gripper->enabletorque(false);
-
-while (true)
+void STMServerThread()
 {
+//Wait for incoming connections from Functional Blocks
+STMRecordType incomingConnection = STMRecordType::SPEECH_INPUT; //these are temp until actual code is written
+string inputFromFunctionalBlock;  //these are temp until actual code is written
 
-
-robot->RightArm->Shoulder->setPosition(512, 256);
-robot->RightArm->armTwist->setPosition(512, 256);
-robot->RightArm->Elbow->setPosition(512, 256);
-robot->RightArm->Gripper->setPosition(512, 256);
-
-for (int i = 0; i < 10; i++)
+switch (incomingConnection)
 {
-
-int flag = 0;
-while (robot->RightArm->Elbow->isMoving())
+case STMRecordType::SPEECH_INPUT:
 {
-robot->RightArm->Elbow->setCurrentParameters();
-if (flag == 0)
+DEBUG_MSG("SPEECH_INPUT" << endl);
+vector<string> serverInputSubStrings = getSubStrings(inputFromFunctionalBlock, ','); //convert comma separated input into usable substrings
+if (serverInputSubStrings.size() != 3)
 {
-if (robot->RightArm->Elbow->position < 825)
-{
-robot->RightArm->Elbow->setPosition(725, 125);
-flag = 1;
+DEBUG_MSG("SYNTAX RECEIVED FROM FUNCTIONAL BLOCK IS INCORRECT!" << endl);
+break;
 }
+string transcriptionText = serverInputSubStrings[0];
+int transcriptionAccuracy = atoi(serverInputSubStrings[1].c_str());
+int transcriptionLoudness = atoi(serverInputSubStrings[2].c_str());
+//SpeechRecord *incomingSpeech = new SpeechRecord(transcriptionText, transcriptionAccuracy, transcriptionLoudness); // get input and create
+//AIPU_STM->inputRecord(static_cast<STMRecord*>(incomingSpeech));
+
+break;
 }
+case STMRecordType::FACE_DETECTION:
+DEBUG_MSG("FACE_DETECTION" << endl);
+break;
+case STMRecordType::SOUND_DETECTION:
+DEBUG_MSG("SOUND_DETECTION" << endl);
+break;
+case STMRecordType::SKELETAL_DETECTION:
+DEBUG_MSG("SKELETAL_DETECTION" << endl);
+break;
+case STMRecordType::THERMAL_DETECTION:
+DEBUG_MSG("THERMAL_DETECTION" << endl);
+break;
+case STMRecordType::HAND_GESTURE:
+DEBUG_MSG("HAND_GESTURE" << endl);
+break;
+case STMRecordType::APP_COMMANDER:
+DEBUG_MSG("APP_COMMANDER" << endl);
+break;
+case STMRecordType::SLAM:
+DEBUG_MSG("SLAM" << endl);
+break;
+case STMRecordType::OBJECTIVE:
+DEBUG_MSG("OBJECTIVE" << endl);
+break;
+case STMRecordType::OBSTACLE_DETECTION:
+DEBUG_MSG("OBSTACLE_DETECTION" << endl);
+break;
+case STMRecordType::OBJECT_RECOGNITION:
+DEBUG_MSG("OBJECT_RECOGNITION" << endl);
+break;
+case STMRecordType::FACE_RECOGNITION:
+DEBUG_MSG("FACE_RECOGNITION" << endl);
+break;
+default:
+DEBUG_MSG("UNRECOGNIZED STM RECORD TYPE" << endl);
+break;
 }
 
 
-robot->RightArm->Shoulder->setPosition(512, 256);
-robot->RightArm->armTwist->setPosition(815, 256);
-robot->RightArm->Elbow->setPosition(845, 256);
-robot->RightArm->Gripper->setPosition(722, 256);
-
-flag = 0;
-while (robot->RightArm->Elbow->isMoving())
-{
-robot->RightArm->Elbow->setCurrentParameters();
-if (flag == 0)
-{
-if (robot->RightArm->Elbow->position > 750)
-{
-robot->RightArm->Elbow->setPosition(845, 125);
-flag = 1;
-}
-}
-}
-
-robot->RightArm->Shoulder->setPosition(512, 256);
-robot->RightArm->armTwist->setPosition(815, 256);
-robot->RightArm->Elbow->setPosition(725, 256);
-robot->RightArm->Gripper->setPosition(395, 256);
-}
-
-while (robot->RightArm->isMoving())
-{
-}
-
-robot->RightArm->Shoulder->setPosition(512, 256);
-robot->RightArm->armTwist->setPosition(512, 256);
-robot->RightArm->Elbow->setPosition(512, 256);
-robot->RightArm->Gripper->setPosition(512, 256);
-
-//robot->RightArm->setCurrentParameters();
-//cout << robot->RightArm->Shoulder->position << ",";
-//cout << robot->RightArm->armTwist->position << ",";
-//cout << robot->RightArm->Elbow->position << ",";
-//cout << robot->RightArm->Gripper->position << endl;
-
-
-std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+//Process Data and Put into STM
 
 }
 */
