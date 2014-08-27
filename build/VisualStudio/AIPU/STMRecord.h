@@ -84,7 +84,7 @@ class SpeechRecord : public STMRecord {
 
 public:
 	string transcriptionText;
-	int transcriptionAccuracy;
+	float transcriptionAccuracy;
 	int transcriptionLoudness;
 
 	SpeechRecord(string inputTranscription, int inputAccuracy, int inputLoudness);

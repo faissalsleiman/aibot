@@ -55,9 +55,9 @@ public:
 	*/
 	RebeccaArguments(int argc, char* argv[])
 		: m_exeName(string(argv[0])),
-		m_aimlSchemaPath("../../../config/rebecca/resources/schema/AIML.xsd"),
-		m_commonTypesSchemaPath("../../../config/rebecca/resources/schema/common-types.xsd"),
-		m_botConfigurationSchemaPath("../../../config/rebecca/resources/schema/bot-configuration.xsd"),
+		m_aimlSchemaPath("../../resources/schema/AIML.xsd"),
+		m_commonTypesSchemaPath("../resources/schema/common-types.xsd"),
+		m_botConfigurationSchemaPath("../resources/schema/bot-configuration.xsd"),
 		m_configurationDirectory("../../../config/rebecca/conf"),
 		m_aimlDirectory("../../../config/rebecca/aiml/annotated_aibot"),
 		m_currentArgument(NO_ARG)

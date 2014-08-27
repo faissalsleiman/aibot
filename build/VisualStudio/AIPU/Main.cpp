@@ -1,13 +1,12 @@
-//TODO:
-//Create threads and message passing
-//Create a face recognition thread that talks to STM Thread
-//Write the code in main to read the face detected and track it using the robot structure's neck
-//
-//
-//Create a class called SpeechSynthesizer that intiailzes itself in main
-//Speech Synthesizer must have a function Speak(text, volume, speed)
-//
-//
+//Environment Variables that need to be created
+//BOOST_INCLUDE
+//BOOST_LIB
+//BOOST_LIBD
+//DYNAMIXEL
+//OPENCV_DIR
+//XERCES_INCLUDE
+//XERCES_LIB
+//XERCES_LIBD
 
 #include <iostream>
 #include <iomanip>
@@ -479,7 +478,6 @@ string getRebeccaAIMLresponse(string input)
 	return response.c_str();
 }
 
-
 #pragma endregion RebeccaAIML Engine
 
 #pragma region PocketSphinx Engine
@@ -499,23 +497,14 @@ void runPocketSphinxEngine(int argc, char* argv[])
 	while (true)
 	{
 		getUtterance(mic);
-		string input = string(mic.hyp);
-
-		cout << "You Said:" << input << endl;
-
-		/*
-		TcpClient client("127.0.0.1");
-
-		if (!client.Start(DEFAULT_TTS_ENGINE_PORT))
+		string transcription = string(mic.hyp);
+		float transcriptionAccuracy = mic.prob;
+		if (transcriptionAccuracy > 0.1 && transcription!="")
 		{
-			DEBUG_MSG("Error Communicating with TTS Engine");
-			break;
+			SpeechRecord *inputRecord = new SpeechRecord(transcription, transcriptionAccuracy, 100);
+			AIPU_STM->inputRecord(static_cast<STMRecord*>(inputRecord));
 		}
 
-		client.Send((char*)textToSpeak.c_str());
-
-		client.Stop();
-		*/
 	}
 
 }
@@ -525,8 +514,6 @@ void runPocketSphinxEngine(int argc, char* argv[])
 
 
 int main() {
-	
-
 	//Initialize Functional Blocks, Represented in Code as Threads
 	AIPU_STM = new ShortTermMemory(); // Initialize Short Term Memory Structure
 
@@ -546,10 +533,8 @@ int main() {
 	std::thread t3(TTSEngineServer); //Text-To-Speech Engine
 	char* argv[] = { "AIPU.exe", "-hmm", "hub4wsj_sc_8k", "-dict", "aibot.dic", "-lm", "aibot.lm", NULL };
 	std::thread t4(runPocketSphinxEngine,7, argv); //Speech to Text Engine (PocketSphinx) 
-	//note to faisoola, pocketsphinx is not yet integrated in the AIPU, im just running it to cout what you say
+	
 
-
-	//std::this_thread::sleep_for(std::chrono::milliseconds(10000000));
     
     //Start State Machine
     //Read Data from STM (Short-Term-Memory) based on State
@@ -559,11 +544,9 @@ int main() {
 	//Important Rule for STM, in any state besides IDLE, once a positive record is hit, you will most likely need to
 	//re-set the AIPU state, otherwise it could timeout (depending on the code)
 
-	//FAISOOLA, the below code is just for testing, nothing written below this line is meant to do anything correct, it is just for illustration purposes
-   
 	while (true)
 	{
-		//std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		
 		switch (AIPU_STM->getCurrentAIPUState())
 		{
 			case AIPUSTATE::IDLE:
@@ -573,23 +556,16 @@ int main() {
 				if a face is detected move to engaged in convo within 1-2 sec
 				if kickoff phrase received in good accuracy then go to engaged in convo
 				*/
-				FaceDetectionRecord *detectedFaceRecord = NULL;
-
-				STMRecord *tempReadRecord;
-				for (int i = 0; i < AIPU_STM->getSTMSize(); i++)
+				FaceDetectionRecord *detectedFaceRecord = static_cast<FaceDetectionRecord*>(AIPU_STM->getLatestUnprocessedRecord(STMRecordType::FACE_DETECTION));
+				if (detectedFaceRecord == NULL)
+				{ //do nothing, rest for 10 ms
+					std::this_thread::sleep_for(std::chrono::milliseconds(10));
+				}
+				else 
 				{
-					tempReadRecord = AIPU_STM->getSTMRecord(i);
-					if (tempReadRecord == NULL || tempReadRecord->processed)
-						continue;
-					if (tempReadRecord->recordType == STMRecordType::FACE_DETECTION) //code must block here otherwise a combo serial number for record must be created this will conmbine type with record number
-					{
-						detectedFaceRecord = static_cast<FaceDetectionRecord*>(tempReadRecord);
-						detectedFaceRecord->markAsProcessed(); 
-						AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION);
-						DEBUG_MSG("READ RECORD: " << detectedFaceRecord->faceXCoordinate << "," << detectedFaceRecord->faceYCoordinate << endl);
-								
-						break; //this record would be the current state, the reason is that our STM is a stack, Last in First Out
-					}
+					detectedFaceRecord->markAsProcessed();
+					AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION);
+					DEBUG_MSG("READ RECORD: " << detectedFaceRecord->faceXCoordinate << "," << detectedFaceRecord->faceYCoordinate << endl);
 				}
 				break;
 			}
@@ -621,115 +597,153 @@ int main() {
 				if sound is detected from another source then ignore it
 				keep track of face and maintain eye contact with it
 				*/
-				STMRecord *tempReadRecord;
-				for (int i = 0; i < AIPU_STM->getSTMSize(); i++)
+				FaceDetectionRecord *detectedFaceRecord = static_cast<FaceDetectionRecord*>(AIPU_STM->getLatestUnprocessedRecord(STMRecordType::FACE_DETECTION));
+				if (detectedFaceRecord == NULL) //no face detected
 				{
-					tempReadRecord = AIPU_STM->getSTMRecord(i);
-					if (tempReadRecord == NULL || tempReadRecord->processed || (tempReadRecord->getTimeRelativeToNowInMilliSeconds() > AIPU_STM->getLastAIPUStateChangeTimeRelativeToNowInMilliSeconds()))
-						continue;
-					if (tempReadRecord->recordType == STMRecordType::FACE_DETECTION ) //code must block here otherwise a combo serial number for record must be created this will conmbine type with record number
+					if (AIPU_STM->getLastAIPUStateChangeTimeRelativeToNowInMilliSeconds() > 5000)
 					{
-						FaceDetectionRecord * inputRecord = static_cast<FaceDetectionRecord*>(tempReadRecord);
-						inputRecord->markAsProcessed();
-						AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION); //reset current state
-						DEBUG_MSG("READING RECORD: " << inputRecord->faceXCoordinate << "," << inputRecord->faceYCoordinate << endl);
-						/*
-						STEPS FOR CALCULATING ANGLE SHIFT for Servo Motor
-						1-getFaceDistance() function must be calibrated to get an accurate measurement of planar distance to the face
-						2-Shift from center camera must be converted to cm using this formula
-						Shift in cm = (tan(camera viewing angle/2) x (planar distance to face in cm) ) x Center ShiftX / (CAPTUREWIDTH/2)
-						3-atan(Shift from center / planar distance to face) will give us the angle shift
-						NOTE: this result will be in radian
-						4-position to set the servo to must be set using the following formula (assuming 512 is center position)
-						position to set = (angle calculated in step3 / 1.57) x (unsigned additional servo int value at a 90degree angle)
-						the value represents 90degrees converted to radian
-						*/
-
-						//CALCULATIONS STEP 1
-						double centerShiftX = -(inputRecord->faceXCoordinate + (inputRecord->faceWidth / 2) - (CAPTUREWIDTH / 2));
-						double centerShiftY = -(inputRecord->faceYCoordinate + (inputRecord->faceHeight / 2) - (CAPTUREHEIGHT / 2));
-						double planarFaceDistance = getFaceDistance(inputRecord->faceWidth, inputRecord->faceHeight);
-						DEBUG_MSG("Approx. Distance in cm: " << planarFaceDistance << endl);
-
-
-						//CALCULATIONS STEP 2
-						//note we are multiplying the angel by pi and divided by 180 because we need to work in radians
-						double centerShiftXinCM = tan((XCAPTUREVIEWINGANGLE / 2) *3.14159265 / 180) * planarFaceDistance * centerShiftX / (CAPTUREWIDTH / 2);
-						double centerShiftYinCM = tan((YCAPTUREVIEWINGANGLE / 2) *3.14159265 / 180) * planarFaceDistance * centerShiftY / (CAPTUREHEIGHT / 2);
-
-						//CALCULATIONS STEP 3
-						double angleShiftX = atan(centerShiftXinCM / planarFaceDistance);
-						double angleShiftY = atan(centerShiftYinCM / planarFaceDistance);
-
-						//CALCULATIONS STEP 4
-						int XServoPositiontoSet = ((angleShiftX / 1.57) * 310);
-						int YServoPositiontoSet = ((angleShiftY / 1.57) * 310);
-
-						if (-0.07 > angleShiftX && angleShiftX > 0.07)
-						{
-						}
-						else
-						{
-							//Note servos do not have overload management, so if you have a bracket and try to set an unreachable angel without setting limits, the servo will most definitely go to overload
-							robot->Neck->panServo->setPosition(XServoPositiontoSet + robot->Neck->panServo->position, 128); //;1023 will never be achieved, it will only go to the limit.
-						}
-						if (-0.02 < angleShiftY && angleShiftY < 0.02)
-						{
-						}
-						else
-						{
-							robot->Neck->tiltServo->setPosition(YServoPositiontoSet + robot->Neck->tiltServo->position, 128); //;1023 will never be achieved, it will only go to the limit.
-						}
-						do
-						{
-							robot->Neck->panServo->setCurrentParameters();
-							DEBUG_MSG("Current (Position,Speed,Load,Temperature): (");
-							DEBUG_MSG(robot->Neck->panServo->position);
-							DEBUG_MSG("," << robot->Neck->panServo->speed);
-							DEBUG_MSG("," << robot->Neck->panServo->load);
-							DEBUG_MSG("," << robot->Neck->panServo->temperature << ")" << endl);
-							DEBUG_MSG("Comm Status: " << robot->Neck->panServo->checkCommStatus() << endl);
-						} while (robot->Neck->panServo->isMoving());
-
-						do
-						{
-							robot->Neck->tiltServo->setCurrentParameters();
-							DEBUG_MSG("Current (Position,Speed,Load,Temperature): (");
-							DEBUG_MSG(robot->Neck->tiltServo->position);
-							DEBUG_MSG("," << robot->Neck->tiltServo->speed);
-							DEBUG_MSG("," << robot->Neck->tiltServo->load);
-							DEBUG_MSG("," << robot->Neck->tiltServo->temperature << ")" << endl);
-							DEBUG_MSG("Comm Status: " << robot->Neck->tiltServo->checkCommStatus() << endl);
-						} while (robot->Neck->tiltServo->isMoving());
-
-						break; //this record would be the current state, the reason is that our STM is a stack, Last in First Out
-					}
-					else if (tempReadRecord->recordType == STMRecordType::APP_COMMANDER) //code must block here otherwise a combo serial number for record must be created this will conmbine type with record number
-					{
-						AppCommanderRecord* inputRecord = static_cast<AppCommanderRecord*>(tempReadRecord);
-						inputRecord->markAsProcessed();
-
-						//Here send the text to AIML engine
-
-						string textToSpeak = "You Wrote, " + inputRecord->inputCommand;
-
-						//Send MSG to TTS Engine to Speak the command
-
-						TcpClient client("127.0.0.1");
-
-						if (!client.Start(DEFAULT_TTS_ENGINE_PORT))
-						{
-							DEBUG_MSG("Error Communicating with TTS Engine");
-							break;
-						}
-
-						client.Send((char*)textToSpeak.c_str());
-
-						client.Stop();
-
-						AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION); //reset current state
+						AIPU_STM->setCurrentAIPUState(AIPUSTATE::IDLE); //go back to idle state
+						break;
 					}
 				}
+				else
+				{
+					detectedFaceRecord->markAsProcessed();
+					AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION); //reset AIPU State
+					//DEBUG_MSG("READ RECORD: " << detectedFaceRecord->faceXCoordinate << "," << detectedFaceRecord->faceYCoordinate << endl);
+					/*
+					STEPS FOR CALCULATING ANGLE SHIFT for Servo Motor
+					1-getFaceDistance() function must be calibrated to get an accurate measurement of planar distance to the face
+					2-Shift from center camera must be converted to cm using this formula
+					Shift in cm = (tan(camera viewing angle/2) x (planar distance to face in cm) ) x Center ShiftX / (CAPTUREWIDTH/2)
+					3-atan(Shift from center / planar distance to face) will give us the angle shift
+					NOTE: this result will be in radian
+					4-position to set the servo to must be set using the following formula (assuming 512 is center position)
+					position to set = (angle calculated in step3 / 1.57) x (unsigned additional servo int value at a 90degree angle)
+					the value represents 90degrees converted to radian
+					*/
+
+					//CALCULATIONS STEP 1
+					double centerShiftX = -(detectedFaceRecord->faceXCoordinate + (detectedFaceRecord->faceWidth / 2) - (CAPTUREWIDTH / 2));
+					double centerShiftY = -(detectedFaceRecord->faceYCoordinate + (detectedFaceRecord->faceHeight / 2) - (CAPTUREHEIGHT / 2));
+					double planarFaceDistance = getFaceDistance(detectedFaceRecord->faceWidth, detectedFaceRecord->faceHeight);
+					DEBUG_MSG("Approx. Distance in cm: " << planarFaceDistance << endl);
+
+
+					//CALCULATIONS STEP 2
+					//note we are multiplying the angel by pi and divided by 180 because we need to work in radians
+					double centerShiftXinCM = tan((XCAPTUREVIEWINGANGLE / 2) *3.14159265 / 180) * planarFaceDistance * centerShiftX / (CAPTUREWIDTH / 2);
+					double centerShiftYinCM = tan((YCAPTUREVIEWINGANGLE / 2) *3.14159265 / 180) * planarFaceDistance * centerShiftY / (CAPTUREHEIGHT / 2);
+
+					//CALCULATIONS STEP 3
+					double angleShiftX = atan(centerShiftXinCM / planarFaceDistance);
+					double angleShiftY = atan(centerShiftYinCM / planarFaceDistance);
+
+					//CALCULATIONS STEP 4
+					int XServoPositiontoSet = ((angleShiftX / 1.57) * 310);
+					int YServoPositiontoSet = ((angleShiftY / 1.57) * 310);
+
+					if (-0.07 > angleShiftX && angleShiftX > 0.07)
+					{//do nothing
+					}
+					else
+					{
+						//Note servos do not have overload management, so if you have a bracket and try to set an unreachable angel without setting limits, the servo will most definitely go to overload
+						robot->Neck->panServo->setPosition(XServoPositiontoSet + robot->Neck->panServo->position, 128); //;1023 will never be achieved, it will only go to the limit.
+					}
+					if (-0.02 < angleShiftY && angleShiftY < 0.02)
+					{//do nothing
+					}
+					else
+					{
+						robot->Neck->tiltServo->setPosition(YServoPositiontoSet + robot->Neck->tiltServo->position, 128); //;1023 will never be achieved, it will only go to the limit.
+					}
+					do
+					{
+						robot->Neck->panServo->setCurrentParameters();
+						//DEBUG_MSG("Current (Position,Speed,Load,Temperature): (");
+						//DEBUG_MSG(robot->Neck->panServo->position);
+						//DEBUG_MSG("," << robot->Neck->panServo->speed);
+						//DEBUG_MSG("," << robot->Neck->panServo->load);
+						//DEBUG_MSG("," << robot->Neck->panServo->temperature << ")" << endl);
+						//DEBUG_MSG("Comm Status: " << robot->Neck->panServo->checkCommStatus() << endl);
+					} while (robot->Neck->panServo->isMoving());
+
+					do
+					{
+						robot->Neck->tiltServo->setCurrentParameters();
+						//DEBUG_MSG("Current (Position,Speed,Load,Temperature): (");
+						//DEBUG_MSG(robot->Neck->tiltServo->position);
+						//DEBUG_MSG("," << robot->Neck->tiltServo->speed);
+						//DEBUG_MSG("," << robot->Neck->tiltServo->load);
+						//DEBUG_MSG("," << robot->Neck->tiltServo->temperature << ")" << endl);
+						//DEBUG_MSG("Comm Status: " << robot->Neck->tiltServo->checkCommStatus() << endl);
+					} while (robot->Neck->tiltServo->isMoving());
+
+				}
+
+				AppCommanderRecord *appCommanderRecord = static_cast<AppCommanderRecord*>(AIPU_STM->getLatestUnprocessedRecord(STMRecordType::APP_COMMANDER));
+				if (appCommanderRecord == NULL)
+				{
+					//do nothing
+				}
+				else
+				{
+					appCommanderRecord->markAsProcessed();
+					AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION); //reset AIPU State
+
+					//Here send the text to AIML engine
+					string AIMLEngineResponse = getRebeccaAIMLresponse(appCommanderRecord->inputCommand);
+
+					//Send MSG to TTS Engine to Speak the command
+
+					TcpClient client("127.0.0.1");
+
+					if (!client.Start(DEFAULT_TTS_ENGINE_PORT))
+					{
+						DEBUG_MSG("Error Communicating with TTS Engine");
+						break;
+					}
+
+					client.Send((char*)AIMLEngineResponse.c_str());
+
+					client.Stop();
+				}
+
+				//NOTE, fetching a speech record might be an issue if faces are detected very quickly, 
+				//the reason is the condition
+				//"tempReadRecord->getTimeRelativeToNowInMilliSeconds() > getLastAIPUStateChangeTimeRelativeToNowInMilliSeconds())"
+				//since the state is reset at every fsce detection event
+				
+				SpeechRecord *speechRecord = static_cast<SpeechRecord*>(AIPU_STM->getLatestUnprocessedRecord(STMRecordType::SPEECH_INPUT));
+				if (speechRecord == NULL)
+				{
+					//do nothing
+				}
+				else
+				{
+					speechRecord->markAsProcessed();
+					AIPU_STM->setCurrentAIPUState(AIPUSTATE::ENGAGED_IN_COVERSATION); //reset AIPU State
+					//Here send the text to AIML engine
+					string AIMLEngineResponse = getRebeccaAIMLresponse(speechRecord->transcriptionText);
+
+					//Send MSG to TTS Engine to Speak the command
+
+					TcpClient client("127.0.0.1");
+
+					if (!client.Start(DEFAULT_TTS_ENGINE_PORT))
+					{
+						DEBUG_MSG("Error Communicating with TTS Engine");
+						break;
+					}
+
+					client.Send((char*)AIMLEngineResponse.c_str());
+
+					client.Stop();
+
+				}
+
+				
 				break;
 			}
 			case AIPUSTATE::CHARGING_BATTERY:

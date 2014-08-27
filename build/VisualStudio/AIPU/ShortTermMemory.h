@@ -53,5 +53,21 @@ public:
 		steady_clock::time_point currentTime = steady_clock::now(); //currrent time of running this function
 		return duration_cast<milliseconds>(currentTime - timeStampOfLastAIPUStateSet).count();
 	}
+	STMRecord * getLatestUnprocessedRecord(STMRecordType ofRecordType ) //gets latest record of a certain type  but ignores if it is processed already or if it was created after the last AIPU state has changed
+	{
+		STMRecord *tempReadRecord = NULL;
+		for (int i = 0; i < SHORT_TERM_MEMORY_SIZE ; i++)
+		{
+			tempReadRecord = STM[i];
+			if (tempReadRecord == NULL || tempReadRecord->processed) // this makes sure that the record we are processing has not been already processed
+				continue;
+			if (tempReadRecord->getTimeRelativeToNowInMilliSeconds() > getLastAIPUStateChangeTimeRelativeToNowInMilliSeconds())
+				//this makes sure that the record we are processing did not exist before the last AIPU state change. In order for this to be effective, you must always reset the AIPU state after processing an actual record
+				continue;
+			if (tempReadRecord->recordType == ofRecordType)
+				return tempReadRecord;
+		}
+		return NULL;
+	}
 
 };

@@ -16,6 +16,12 @@
     <Filter Include="RobotMechanics">
       <UniqueIdentifier>{e5c49064-7291-4821-8d77-92c8f6f35a2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RebeccaAIML">
+      <UniqueIdentifier>{bf631d27-6dad-4f2f-bf68-daa0d8851554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PocketSphinx">
+      <UniqueIdentifier>{fad640d6-531c-4fac-a477-af94c19031ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -51,6 +57,12 @@
     <ClCompile Include="RobotStructure.cpp">
       <Filter>RobotMechanics</Filter>
     </ClCompile>
+    <ClCompile Include="rebecca.cpp">
+      <Filter>RebeccaAIML</Filter>
+    </ClCompile>
+    <ClCompile Include="continuous.cpp">
+      <Filter>PocketSphinx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="STMRecord.h">
@@ -85,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="TTSTcpClient.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rebecca.h">
+      <Filter>RebeccaAIML</Filter>
+    </ClInclude>
+    <ClInclude Include="continuous.h">
+      <Filter>PocketSphinx</Filter>
+    </ClInclude>
+    <ClInclude Include="AIPUArguments.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
