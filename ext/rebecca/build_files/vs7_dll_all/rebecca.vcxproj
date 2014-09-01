@@ -34,9 +34,11 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\build\VisualStudio\PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\build\VisualStudio\PropertySheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -48,8 +50,6 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,7 +140,6 @@ exit 1
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;$(XERCES_INCLUDE);$(BOOST_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;REBECCA_EXPORTS;BOOST_LIB_DIAGNOSTIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -153,15 +152,12 @@ exit 1
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
+      <AdditionalIncludeDirectories>..\..\include;$(INSTALL_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;xerces-c_3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(XERCES_LIBD);$(BOOST_LIBD);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Midl>
@@ -172,50 +168,7 @@ exit 1
       <TypeLibraryName>.\..\..\bin\debug/rebecca.tlb</TypeLibraryName>
       <HeaderFileName />
     </Midl>
-    <PreBuildEvent>
-      <Command>%40echo off
-
-if X%25BOOST_INCLUDE%25==X goto HOWTORUN
-if X%25BOOST_LIB%25 == X goto HOWTORUN
-if X%25BOOST_LIBD%25 == X goto HOWTORUN
-if X%25XERCES_LIB%25 == X goto HOWTORUN
-if X%25XERCES_LIBD%25 == X goto HOWTORUN
-if X%25XERCES_INCLUDE%25 == X goto HOWTORUN
-
-goto END
-
-:HOWTORUN
-echo For this sample to work, you have to install the C++ boost library and
-echo define a few variables.  You can get the most current boost library from
-echo http://www.boost.org/.  The variables you have to define are:
-echo.
-echo BOOST_INCLUDE -- Point this to the location of your boost header files.
-echo XERCES_INCLUDE -- Point this to the location of your xerces header files.
-echo BOOST_LIB     -- Point this to the location of your boost release library.
-echo BOOST_LIBD    -- Point this to the location of your boost debug library.
-echo XERCES_LIB -- Point this to the location of your xerces release library.
-echo XERCES_LIBD -- Point this to the location of your xerces debug library.
-echo.
-echo For example, on a fresh install on the Windows platform I have them set
-echo to:
-echo.
-echo BOOST_INCLUDE : C:\Boost\include\boost_1_32
-echo XERCES_INCLUDE : C:\xerces-c-src_2_6_0\src
-echo BOOST_LIB     : C:\Boost\lib
-echo BOOST_LIBD    : C:\Boost\lib
-echo XERCES_LIB : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Release
-echo XERCES_LIBD : C:\xerces-c-src_2_6_0\Build\Win32\VC7\Debug
-echo.
-echo Notice how I have BOOST_LIB and BOOST_LIBD pointing to the same directory.
-echo That%27s because by default Boost installs its debug and release library into
-echo the same directory.
-
-exit 1
-
-:END
-
-</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>

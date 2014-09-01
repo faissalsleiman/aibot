@@ -137,7 +137,7 @@ void faceRecognizer()
 	//create the cascade classifier object used for the face detection
 	CascadeClassifier face_cascade;
 	//use the haarcascade_frontalface_alt.xml library
-	face_cascade.load("..\\..\\..\\config\\Opencv\\haarcascade_frontalface_alt.xml");
+	face_cascade.load("..\\..\\..\\..\\config\\Opencv\\haarcascade_frontalface_alt.xml");
 
 	//setup video capture device and link it to the first capture device
 	VideoCapture captureDevice;
@@ -536,7 +536,7 @@ int main() {
 	std::thread t1(faceRecognizer); //Face Recognition Engine
 	std::thread t2(socketServer); //APP Communicator
 	std::thread t3(TTSEngineServer); //Text-To-Speech Engine
-	char* argv[] = { "AIPU.exe", "-hmm", "hub4wsj_sc_8k", "-dict", "aibot.dic", "-lm", "aibot.lm", NULL };
+	char* argv[] = { "AIPU.exe", "-hmm", "../../../../config/Sphinx/hub4wsj_sc_8k", "-dict", "../../../../config/Sphinx/aibot.dic", "-lm", "../../../../config/Sphinx/aibot.lm", NULL };
 	std::thread t4(runPocketSphinxEngine,7, argv); //Speech to Text Engine (PocketSphinx) 
 	
 

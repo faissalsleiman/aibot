@@ -33,9 +33,11 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PropertySheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -44,12 +46,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(DYNAMIXEL);$(OPENCV_INCLUDE);$(BOOST_INCLUDE);..\..\..\ext\sphinxbase\include;..\..\..\ext\pocketsphinx\include;..\..\..\ext\rebecca\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AIBOT_ENTRY_POINTS;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DYNAMIXEL);$(OPENCV_BIN);$(OPENCV_LIB);$(BOOST_LIBD);$(OutDir)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_core249d.lib;opencv_imgproc249d.lib;opencv_highgui249d.lib;opencv_ml249d.lib;opencv_video249d.lib;opencv_features2d249d.lib;opencv_calib3d249d.lib;opencv_objdetect249d.lib;opencv_contrib249d.lib;opencv_legacy249d.lib;opencv_flann249d.lib;rebecca.lib;pocketsphinx.lib;sphinxbase.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
