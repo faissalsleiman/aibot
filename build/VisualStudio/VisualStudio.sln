@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aibot", "aibot\aibot.vcxproj", "{A70435E4-E0F2-4E53-9D53-B3EC6327159D}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sphinx_cepview", "..\..\ext\sphinxbase\win32\sphinx_cepview\sphinx_cepview.vcxproj", "{06364F13-FBCE-4E2B-9289-0DD39E246205}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2F025EAD-99BD-40F5-B2CC-F0A28CAD7F2D} = {2F025EAD-99BD-40F5-B2CC-F0A28CAD7F2D}
@@ -75,10 +73,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A70435E4-E0F2-4E53-9D53-B3EC6327159D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A70435E4-E0F2-4E53-9D53-B3EC6327159D}.Debug|Win32.Build.0 = Debug|Win32
-		{A70435E4-E0F2-4E53-9D53-B3EC6327159D}.Release|Win32.ActiveCfg = Release|Win32
-		{A70435E4-E0F2-4E53-9D53-B3EC6327159D}.Release|Win32.Build.0 = Release|Win32
 		{06364F13-FBCE-4E2B-9289-0DD39E246205}.Debug|Win32.ActiveCfg = Debug|Win32
 		{06364F13-FBCE-4E2B-9289-0DD39E246205}.Debug|Win32.Build.0 = Debug|Win32
 		{06364F13-FBCE-4E2B-9289-0DD39E246205}.Release|Win32.ActiveCfg = Release|Win32
@@ -144,11 +138,9 @@ Global
 		{5C149C01-A969-4040-BC80-453451BF99C4}.Release|Win32.ActiveCfg = Release|Win32
 		{5C149C01-A969-4040-BC80-453451BF99C4}.Release|Win32.Build.0 = Release|Win32
 		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Debug|Win32.Build.0 = Debug|Win32
 		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Release|Win32.ActiveCfg = Release|Win32
 		{B30A2E31-8397-41B6-9BDC-3A58111F4275}.Release|Win32.Build.0 = Release|Win32
 		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Debug|Win32.Build.0 = Debug|Win32
 		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Release|Win32.ActiveCfg = Release|Win32
 		{7802A7A4-4D4C-4401-A880-5B4AC27E969D}.Release|Win32.Build.0 = Release|Win32
 		{E956A81A-FCA9-4122-A20A-8AF03517F4F7}.Debug|Win32.ActiveCfg = Debug|Win32

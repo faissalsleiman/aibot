@@ -46,11 +46,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCV_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OPENCV_DIR)\bin;$(OPENCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OPENCV_BIN);$(OPENCV_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_core249d.lib;opencv_imgproc249d.lib;opencv_highgui249d.lib;opencv_ml249d.lib;opencv_video249d.lib;opencv_features2d249d.lib;opencv_calib3d249d.lib;opencv_objdetect249d.lib;opencv_contrib249d.lib;opencv_legacy249d.lib;opencv_flann249d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
