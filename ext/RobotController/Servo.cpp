@@ -1,5 +1,5 @@
 #include <iostream>
-#include "dynamixel.h"
+#include "dynamixel/dynamixel.h"
 
 #pragma comment(lib, "dynamixel.lib")
 
