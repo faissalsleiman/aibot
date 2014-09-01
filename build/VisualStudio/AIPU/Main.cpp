@@ -83,8 +83,7 @@ const double YCAPTUREVIEWINGANGLE = 45;
 #define DEFAULT_TTS_ENGINE_BUFFER_LENGTH    512
 
 //Global Variable for RebeccaAIML
-AimlFacade aiml;
-GraphBuilder &builder = aiml.getGraphBuilder();
+GraphBuilder *builder_ptr;
 
 
 #pragma endregion VARIABLES DECLARATION
@@ -432,9 +431,7 @@ void setupRebeccaAIMLEngine(int argc, char* argv[])
 {
 	RebeccaArguments arguments(argc, argv);
 
-	//Initialize Rebecca
-	myCallBacks callback;
-	builder.setCallBacks(&callback);
+	GraphBuilder &builder = *builder_ptr;
 
 	rebecca_init(arguments, builder);
 
@@ -459,6 +456,7 @@ void setupRebeccaAIMLEngine(int argc, char* argv[])
 
 string getRebeccaAIMLresponse(string input)
 {
+	GraphBuilder &builder = *builder_ptr;
 	//Here we get some internal Rebecca information.
 	cout << endl
 		<< "Internal information:" << endl
@@ -514,6 +512,7 @@ void runPocketSphinxEngine(int argc, char* argv[])
 
 
 int main() {
+
 	//Initialize Functional Blocks, Represented in Code as Threads
 	AIPU_STM = new ShortTermMemory(); // Initialize Short Term Memory Structure
 
@@ -524,6 +523,10 @@ int main() {
 	robot = new RobotStructure();
 	
 	//Start RebeccaAIML Engine
+	AimlFacade aiml;
+	builder_ptr = &aiml.getGraphBuilder();
+	myCallBacks callback;
+	builder_ptr->setCallBacks(&callback);
 	char* RAEarg[] = { "AIPU.exe", NULL };
 	setupRebeccaAIMLEngine(1, RAEarg); // this is a synchronous function
 
@@ -600,7 +603,7 @@ int main() {
 				FaceDetectionRecord *detectedFaceRecord = static_cast<FaceDetectionRecord*>(AIPU_STM->getLatestUnprocessedRecord(STMRecordType::FACE_DETECTION));
 				if (detectedFaceRecord == NULL) //no face detected
 				{
-					if (AIPU_STM->getLastAIPUStateChangeTimeRelativeToNowInMilliSeconds() > 5000)
+					if (AIPU_STM->getLastAIPUStateChangeTimeRelativeToNowInMilliSeconds() > 3000)
 					{
 						AIPU_STM->setCurrentAIPUState(AIPUSTATE::IDLE); //go back to idle state
 						break;
